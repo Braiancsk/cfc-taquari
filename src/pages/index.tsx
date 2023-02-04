@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import { Header } from '@/components/Header/Header'
 import { Courses } from '@/sections/Courses/Courses'
+import { About } from '@/sections/About/About'
+import { Depositions } from '@/sections/Depositions/Depositions'
 
 
 
@@ -19,6 +21,10 @@ export default function Home() {
         <Header/>
 
         <Courses/>
+
+        <About/>
+
+        <Depositions/>
       </main>
     </>
   )

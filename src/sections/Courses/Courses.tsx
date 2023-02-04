@@ -1,3 +1,4 @@
+import { Button } from '@/components/Button/Button'
 import { CourseCard } from '@/components/CourseCard/CourseCard'
 import React from 'react'
 
@@ -35,15 +36,23 @@ export const Courses = () => {
         <h2 className='text-secondary font-semibold text-4xl text-center'>Cursos</h2>
 
         <div className="container grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-4 py-[51px]">
-          {courses.map(course => {
+          {courses.map((course,index) => {
             return (
               <CourseCard
+              key={index}
               title={course.title}
               link={course.link}
               imageUrl={course.imageUrl}
               />
             )
           })}
+        </div>
+
+        <div className='max-w-[345px] w-full mx-auto my-5'>
+          <Button
+          text='Ver mais cursos'
+          variant='secondary'
+          />
         </div>
     </section>
   )

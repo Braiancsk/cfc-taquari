@@ -83,8 +83,8 @@ export const Header = () => {
                 </div>
             </section>
 
-            <div className='relative lg:flex justify-center hidden'>
-            <section className="container flex items-center gap-3 bg-white p-3 rounded-lg shadow-2xl absolute top-[180px]">
+            <div className='relative lg:flex justify-center hidden container'>
+            <section className="flex w-full max-w-[90%] items-center gap-3 bg-white p-3 rounded-lg shadow-2xl absolute top-[180px]">
                 {cards.map(card => {
                     return (
                         <HeaderCard
