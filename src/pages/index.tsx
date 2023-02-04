@@ -5,6 +5,7 @@ import { Header } from '@/components/Header/Header'
 import { Courses } from '@/sections/Courses/Courses'
 import { About } from '@/sections/About/About'
 import { Depositions } from '@/sections/Depositions/Depositions'
+import { Contact } from '@/sections/Contact/Contact'
 
 
 
@@ -25,6 +26,8 @@ export default function Home() {
         <About/>
 
         <Depositions/>
+
+        <Contact/>
       </main>
     </>
   )

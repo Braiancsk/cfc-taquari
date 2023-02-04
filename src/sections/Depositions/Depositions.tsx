@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import { ArrowCircleLeft, Quotes } from "phosphor-react";
+import { ArrowCircleLeft, ArrowCircleRight, Quotes } from "phosphor-react";
 import Image from "next/image";
 
 export const Depositions = () => {
@@ -10,9 +10,10 @@ export const Depositions = () => {
 
   const [sliderRef,instanceRef] = useKeenSlider({
     mode: "snap",
+    
     slides: {
       origin: "center",
-      perView: 2,
+      perView: 1,
       spacing: 10,
     },
     initial: 0,
@@ -26,7 +27,7 @@ export const Depositions = () => {
 
   return (
     <section
-      id="#depositions"
+      id="depoimentos"
       className="pt-[91px] pb-[156px] bg-secondary/20 w-full overflow-hidden my-[67px]"
     >
       <div className="flex flex-col lg:flex-row gap-8 items-center container">
@@ -42,7 +43,8 @@ export const Depositions = () => {
         <div className="relative flex-1 h-full navigation-wrapper">
           <div className="lg:absolute left-0 top-[-140px] ml-auto">
             <div ref={sliderRef} className="keen-slider">
-              <div className="keen-slider__slide lg:max-w-[711px] w-full rounded-lg bg-[#720285] text-white p-[20px]">
+              {[0,1,2,3].map((item, index) => (
+              <div key={index} className="keen-slider__slide rounded-lg bg-[#720285] text-white p-[20px]">
                 <Quotes size={50} weight="fill" />
                 <p className="font-medium text-sm">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -63,59 +65,30 @@ export const Depositions = () => {
                   </div>
                 </div>
               </div>
-              <div className="keen-slider__slide lg:max-w-[700px] w-full rounded-lg bg-[#720285] text-white p-[20px]">
-                <Quotes size={50} weight="fill" />
-                <p className="font-medium text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Praesent dui risus, cursus a semper a, imperdiet nec nisl. Nam
-                  tincidunt imperdiet eros, eu semper arcu congue luctus.
-                </p>
-                <div className="flex gap-2 item-center mt-[21px]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                    alt="Aluno depoimento"
-                    width={50}
-                    height={50}
-                    className="rounded-full h-[50px] w-[50px] object-cover"
-                  />
-                  <div className="flex flex-col gap-1">
-                    <strong className="font-medium">Jane Doe</strong>
-                    <p className="text-xs">CFC Taquari</p>
-                  </div>
-                </div>
-              </div>
-              <div className="keen-slider__slide lg:max-w-[700px] w-full rounded-lg bg-[#720285] text-white p-[20px]">
-                <Quotes size={50} weight="fill" />
-                <p className="font-medium text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Praesent dui risus, cursus a semper a, imperdiet nec nisl. Nam
-                  tincidunt imperdiet eros, eu semper arcu congue luctus.
-                </p>
-                <div className="flex gap-2 item-center mt-[21px]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                    alt="Aluno depoimento"
-                    width={50}
-                    height={50}
-                    className="rounded-full h-[50px] w-[50px] object-cover"
-                  />
-                  <div className="flex flex-col gap-1">
-                    <strong className="font-medium">Jane Doe</strong>
-                    <p className="text-xs">CFC Taquari</p>
-                  </div>
-                </div>
-              </div>
+              ))}
+           
             </div>
-          </div>
-          <button
-            className="absolute bottom-[-181px] right-0"
+            <button
+            className="absolute bottom-[-70px] group disabled:cursor-not-allowed"
             onClick={(e: any) =>
               e.stopPropagation() || instanceRef.current?.prev()
             }
             disabled={currentSlide === 0}
           >
-            <ArrowCircleLeft color="#720285" weight="fill" size={50}/>
+            <ArrowCircleLeft className="fill-[#720285] group-disabled:opacity-50" weight="fill" size={50}/>
           </button>
+            <button
+            className="absolute left-[60px] bottom-[-70px] group disabled:cursor-not-allowed"
+            onClick={(e: any) =>
+              e.stopPropagation() || instanceRef.current?.next()
+            }
+            disabled={currentSlide ===
+              instanceRef?.current?.track.details.slides.length! - 1}
+          >
+            <ArrowCircleRight className="fill-[#720285] group-disabled:opacity-50" weight="fill" size={50}/>
+          </button>
+          </div>
+
         </div>
       </div>
     </section>
