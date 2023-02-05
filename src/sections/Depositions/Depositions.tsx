@@ -28,20 +28,20 @@ export const Depositions = () => {
   return (
     <section
       id="depoimentos"
-      className="pt-[91px] pb-[156px] bg-secondary/20 w-full overflow-hidden my-[67px]"
+      className="pt-[91px] pb-[156px] bg-secondary/20 w-full overflow-hidden my-[67px] h-[600px] lg:h-full"
     >
       <div className="flex flex-col lg:flex-row gap-8 items-center container">
-        <div className="w-full mx-auto lg:ml-auto flex-1">
-          <strong className="text-[40px] leading-[48px] text-secondary font-semibold block">
+        <div className="w-full lg:ml-auto flex-1">
+          <strong className="lg:text-[40px] text-3xl lg:leading-[48px] text-secondary font-semibold block">
             O que nossos alunos dizem sobre nós
           </strong>
-          <p className="font-semibold text-lg text-title/80 max-w-[380px] leading-[28px]">
+          <p className="font-semibold lg:text-lg text-title/80 max-w-[380px] lg:leading-[28px]">
             Veja o que nossos alunos dizem sobre nossa alta taxa de aprovação
           </p>
         </div>
 
-        <div className="relative flex-1 h-full navigation-wrapper">
-          <div className="lg:absolute left-0 top-[-140px] ml-auto">
+        <div className="relative flex-1 w-full h-full navigation-wrapper">
+          <div className="lg:absolute left-0 lg:top-[-140px] mr-auto lg:ml-auto">
             <div ref={sliderRef} className="keen-slider">
               {[0,1,2,3].map((item, index) => (
               <div key={index} className="keen-slider__slide rounded-lg bg-[#720285] text-white p-[20px]">
@@ -68,6 +68,8 @@ export const Depositions = () => {
               ))}
            
             </div>
+            {loaded && instanceRef.current && (
+              <>
             <button
             className="absolute bottom-[-70px] group disabled:cursor-not-allowed"
             onClick={(e: any) =>
@@ -87,6 +89,9 @@ export const Depositions = () => {
           >
             <ArrowCircleRight className="fill-[#720285] group-disabled:opacity-50" weight="fill" size={50}/>
           </button>
+            
+              </>
+          )}
           </div>
 
         </div>

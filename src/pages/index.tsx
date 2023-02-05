@@ -6,6 +6,8 @@ import { Courses } from '@/sections/Courses/Courses'
 import { About } from '@/sections/About/About'
 import { Depositions } from '@/sections/Depositions/Depositions'
 import { Contact } from '@/sections/Contact/Contact'
+import { Footer } from '@/sections/Footer/Footer'
+import { FixedNavDesktop } from '@/components/FixedNavDesktop/FixedNavDesktop'
 
 
 
@@ -19,6 +21,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <FixedNavDesktop/>
         <Header/>
 
         <Courses/>
@@ -28,6 +31,8 @@ export default function Home() {
         <Depositions/>
 
         <Contact/>
+
+        <Footer/>
       </main>
     </>
   )

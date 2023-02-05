@@ -3,7 +3,7 @@ import React from 'react'
 
 export const About = () => {
   return (
-    <section id="about">
+    <section id="sobre-nos">
         <h2 className='text-4xl font-semibold text-secondary text-center'>Sobre nós</h2>
 
         <div className="grid lg:grid-cols-2 gap-5 container mt-[67px]">

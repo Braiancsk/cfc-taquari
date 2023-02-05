@@ -1,9 +1,10 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Books, CalendarBlank, FacebookLogo, Headset, InstagramLogo, Phone, Plus, Student } from "phosphor-react";
 import { Button } from '../Button/Button';
 
 import { HeaderCard } from '../HeaderCard/HeaderCard';
+import { MobileHeader } from '../MobileHeader/MobileHeader';
 
 const cards = [
     {
@@ -33,9 +34,21 @@ const cards = [
 ]
 
 export const Header = () => {
+    const [windowWidth, setWindowWidth] = useState<null | number>(null)
+   
+
+    useEffect(() => {
+        if(window){
+            setWindowWidth(window.innerWidth)
+        }
+    },[])
+
     return (
-        <header className='bg-hero-bg bg-cover bg-center min-h-[750px]'>
+        <header className='bg-hero-bg bg-cover bg-center lg:min-h-[750px]'>
+               {windowWidth! <= 1023 ? <MobileHeader/> : (
+                    <>
             <div className="container flex items-center justify-between py-6">
+             
                 <Image src="/LOGO.png" width={194} height={41} alt="Logo da empresa CFC Taquari" />
 
                 <div className="flex gap-6 items-center">
@@ -59,21 +72,23 @@ export const Header = () => {
 
             <nav className='container flex gap-[10px] items-center text-white my-2'>
                 <a href="#inicio" className='flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-secondary py-[13px] px-5'>
-                    <span className='font-semibold text-lg'>INÍCIO</span>
+                    <span className='font-semibold xl:text-lg'>INÍCIO</span>
                 </a>
                 <a href='#cursos' className='flex-1 border-r-0 border-l-0 group border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5'>
-                    <span className='font-semibold text-lg'>CURSOS</span>
+                    <span className='font-semibold xl:text-lg'>CURSOS</span>
                 </a>
                 <a href='#sobre-nos' className='flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5'>
-                    <span className='font-semibold text-lg'>SOBRE NÓS</span>
+                    <span className='font-semibold xl:text-lg'>SOBRE NÓS</span>
                 </a>
                 <a href='#depoimentos' className='flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5'>
-                    <span className='font-semibold text-lg'>DEPOIMENTOS</span>
+                    <span className='font-semibold xl:text-lg'>DEPOIMENTOS</span>
                 </a>
-                <a href='#depoimentos' className='flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5'>
-                    <span className='font-semibold text-lg'>FALE CONOSCO</span>
+                <a href='#contato' className='flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5'>
+                    <span className='font-semibold xl:text-lg'>FALE CONOSCO</span>
                 </a>
             </nav>
+                    </>
+                )}
 
             <section className='container py-[64px] px-4 text-white  text-center'>
                 <h1 className='text-4xl font-semibold'>Conclua seus cursos em tempo recorde</h1>
@@ -84,7 +99,7 @@ export const Header = () => {
             </section>
 
             <div className='relative lg:flex justify-center hidden container'>
-            <section className="flex w-full max-w-[90%] items-center gap-3 bg-white p-3 rounded-lg shadow-2xl absolute top-[180px]">
+            <section className="flex lg:flex-row flex-col w-full lg:max-w-[90%] items-center gap-3 bg-white p-3 rounded-lg shadow-2xl lg:absolute top-[180px]">
                 {cards.map(card => {
                     return (
                         <HeaderCard

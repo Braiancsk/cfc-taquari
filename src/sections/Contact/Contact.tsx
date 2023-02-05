@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Contact = () => {
   return (
-    <section className='container grid md:grid-cols-2 pb-[67px]'>
+    <section id="contato" className='container grid lg:grid-cols-2 gap-10 lg:gap-2 pb-[67px]'>
         <div className=''>
             <strong className='text-4xl font-semibold text-secondary'>Entre em contato conosco</strong>
             <p className='text-title/80 font-semibold text-sm'>
