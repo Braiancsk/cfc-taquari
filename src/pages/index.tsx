@@ -8,10 +8,14 @@ import { Depositions } from '@/sections/Depositions/Depositions'
 import { Contact } from '@/sections/Contact/Contact'
 import { Footer } from '@/sections/Footer/Footer'
 import { FixedNavDesktop } from '@/components/FixedNavDesktop/FixedNavDesktop'
+import { useEffect, useRef } from 'react'
+import { useInView } from 'framer-motion'
 
 
 
 export default function Home() {
+
+
   return (
     <>
       <Head>
@@ -21,8 +25,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <FixedNavDesktop/>
-        <Header/>
+      <Header/>
 
         <Courses/>
 

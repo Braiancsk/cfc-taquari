@@ -1,9 +1,10 @@
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
-export const FixedNavDesktop = () => {
+const MotionFixedNavDesktop = React.forwardRef((props, ref:any) => {
   return (
-    <section className='shadow-xl bg-white fixed inset-0 h-[80px] z-20'>
+    <section ref={ref} className='shadow-xl bg-white fixed inset-0 h-[80px] z-20'>
     <div className='container flex justify-between items-center h-full'>
         <Image src="/LOGO.png" width={194} height={41} alt="Logo da empresa CFC Taquari" />
 
@@ -37,4 +38,6 @@ export const FixedNavDesktop = () => {
     </div>
     </section>
   )
-}
+})
+
+export const FixedNavDesktop = motion(MotionFixedNavDesktop, { forwardMotionProps: true })
