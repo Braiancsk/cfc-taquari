@@ -7,7 +7,7 @@ import { HeaderCardProps } from './HeaderCardProps.types'
 export const HeaderCard = ({icon,title,description,link}:HeaderCardProps) => {
     const [isHovered, setIsHovered] = useState(false)
   return (
-    <motion.div whileHover={{scale:1.2,backgroundColor:'#720285'}} onMouseEnter={() => setIsHovered(true)}  onMouseLeave={() => setIsHovered(false)} className="border-b-2 border-b-[#C3C3C3] lg:border-r-2 last-of-type:border-r-0 lg:border-r-[#C3C3C3] group hover:border-0 flex-1 py-[30px]">
+    <motion.div whileHover={{scale:1.2,backgroundColor:'#720285'}} onMouseEnter={() => setIsHovered(true)}  onMouseLeave={() => setIsHovered(false)} className="lg:border-r-2 last-of-type:border-r-0 lg:border-r-[#C3C3C3] group hover:border-0 flex-1 py-[30px]">
     <div className="flex items-center justify-center flex-col gap-2 text-center">
         {icon}
         <strong className='text-2xl max-w-[168px] text-title group-hover:text-white transition-all'>{title}</strong>

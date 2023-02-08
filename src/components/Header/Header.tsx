@@ -16,6 +16,8 @@ import { HeaderCard } from "../HeaderCard/HeaderCard";
 import { MobileHeader } from "../MobileHeader/MobileHeader";
 import { AnimatePresence, useInView } from "framer-motion";
 import { FixedNavDesktop } from "../FixedNavDesktop/FixedNavDesktop";
+import { HeaderLink } from "./HeaderLink/HeaderLink";
+import { HeaderActive } from "@/@types/HeaderActive.types";
 
 const cards = [
   {
@@ -44,7 +46,7 @@ const cards = [
   },
 ];
 
-export const Header = () => {
+export const Header = ({coursesActive,aboutActive,depositionsActive,contactActive}:HeaderActive) => {
   const [windowWidth, setWindowWidth] = useState<null | number>(null);
 
   useEffect(() => {
@@ -53,10 +55,7 @@ export const Header = () => {
 
   const headerRef = useRef<any>(null);
   const isHeaderInView = useInView(headerRef);
-
-  useEffect(() => {
-    console.log("Element is in view: ", isHeaderInView);
-  }, [isHeaderInView]);
+  
 
   return (
     <header
@@ -116,40 +115,23 @@ export const Header = () => {
               </div>
 
               <nav className="container flex gap-[10px] items-center text-white my-2">
-                <a
-                  href="#inicio"
-                  className="flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-secondary py-[13px] px-5"
-                >
-                  <span className="font-semibold xl:text-lg">INÍCIO</span>
-                </a>
-                <a
-                  href="#cursos"
-                  className="flex-1 border-r-0 border-l-0 group border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5"
-                >
-                  <span className="font-semibold xl:text-lg">CURSOS</span>
-                </a>
-                <a
-                  href="#sobre-nos"
-                  className="flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5"
-                >
-                  <span className="font-semibold xl:text-lg">SOBRE NÓS</span>
-                </a>
-                <a
-                  href="#depoimentos"
-                  className="flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5"
-                >
-                  <span className="font-semibold xl:text-lg">DEPOIMENTOS</span>
-                </a>
-                <a
-                  href="#contato"
-                  className="flex-1 border-r-0 border-l-0 border-b-0 border-t-4 border-4 transition hover:border-secondary border-white/25 py-[13px] px-5"
-                >
-                  <span className="font-semibold xl:text-lg">FALE CONOSCO</span>
-                </a>
+              <HeaderLink active={isHeaderInView} text="INÍCIO" link="inicio"/>
+              <HeaderLink active={coursesActive} text="CURSOS" link="cursos"/>
+              <HeaderLink active={aboutActive} text="SOBRE NÓS" link="sobre-nos"/>
+              <HeaderLink active={depositionsActive} text="DEPOIMENTOS" link="depoimentos"/>
+              <HeaderLink active={contactActive} text="CONTATO" link="contato"/>
               </nav>
             </>
           ) : (
-                <FixedNavDesktop initial={{opacity:0, y:-100}} transition={{type:'spring'}} animate={{opacity:1,y:0}} exit={{opacity:0, y:-100}}/>
+                <FixedNavDesktop initial={{opacity:0, y:-100}} 
+                homeActive={isHeaderInView}
+                coursesActive={coursesActive}
+                aboutActive={aboutActive}
+                depositionsActive={depositionsActive}
+                contactActive={contactActive}
+                transition={{type:'spring'}} 
+                animate={{opacity:1,y:0}} 
+                exit={{opacity:0, y:-100}}/>
             )}
         </>
       )}

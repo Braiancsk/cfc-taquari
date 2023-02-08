@@ -15,6 +15,17 @@ import { useInView } from 'framer-motion'
 
 export default function Home() {
 
+  const coursesRef = useRef<any>(null);
+  const isCoursesInView = useInView(coursesRef,{amount:0.3});
+
+  const aboutRef = useRef<any>(null);
+  const isAboutInView = useInView(aboutRef,{amount:0.7});
+
+
+
+  useEffect(() => {
+    console.log("Element is in view: ", isCoursesInView);
+  }, [isCoursesInView]);
 
   return (
     <>
@@ -25,11 +36,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-      <Header/>
+      <Header
+      coursesActive={isCoursesInView}
+      aboutActive={isAboutInView}
+      depositionsActive={false}
+      contactActive={false}
+      />
 
-        <Courses/>
+        <Courses ref={coursesRef}/>
 
-        <About/>
+        <About ref={aboutRef}/>
 
         <Depositions/>
 

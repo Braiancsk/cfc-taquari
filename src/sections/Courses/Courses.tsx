@@ -30,12 +30,12 @@ const courses = [
     imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
   },
 ]
-export const Courses = () => {
+export const Courses = React.forwardRef((props,ref:any) => {
   return (
-    <section id="cursos" className='pt-[67px] lg:pt-[227px] pb-[67px]'>
-        <h2 className='text-secondary font-semibold text-4xl text-center'>Cursos</h2>
+    <section ref={ref} id="cursos" className='pt-[67px] lg:pt-[227px] pb-[67px]'>
+        <h2  className='text-secondary font-semibold text-4xl text-center'>Cursos</h2>
 
-        <div className="container grid md:grid-cols-3 lg:grid-cols-4 items-center gap-4 py-[51px]">
+        <div className="container grid md:grid-cols-3 lg:grid-cols-4 items-center gap-4 py-[51px] relative">
           {courses.map((course,index) => {
             return (
               <CourseCard
@@ -56,4 +56,4 @@ export const Courses = () => {
         </div>
     </section>
   )
-}
+})

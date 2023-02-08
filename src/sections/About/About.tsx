@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
 
-export const About = () => {
+export const About = React.forwardRef((props,ref:any) => {
   return (
-    <section id="sobre-nos">
+    <section ref={ref} id="sobre-nos">
         <h2 className='text-4xl font-semibold text-secondary text-center'>Sobre nós</h2>
 
         <div className="grid lg:grid-cols-2 gap-5 container mt-[67px]">
@@ -19,4 +19,4 @@ export const About = () => {
         </div>
     </section>
   )
-}
+})
