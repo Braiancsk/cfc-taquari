@@ -19,13 +19,14 @@ export default function Home() {
   const isCoursesInView = useInView(coursesRef,{amount:0.3});
 
   const aboutRef = useRef<any>(null);
-  const isAboutInView = useInView(aboutRef,{amount:0.7});
+  const isAboutInView = useInView(aboutRef,{amount:1});
 
+  const depositionsRef = useRef<any>(null);
+  const isDepositionsInView = useInView(depositionsRef,{amount:1});
 
+  const contactRef = useRef<any>(null);
+  const isContactInView = useInView(contactRef,{amount:0.8});
 
-  useEffect(() => {
-    console.log("Element is in view: ", isCoursesInView);
-  }, [isCoursesInView]);
 
   return (
     <>
@@ -39,17 +40,17 @@ export default function Home() {
       <Header
       coursesActive={isCoursesInView}
       aboutActive={isAboutInView}
-      depositionsActive={false}
-      contactActive={false}
+      depositionsActive={isDepositionsInView}
+      contactActive={isContactInView}
       />
 
         <Courses ref={coursesRef}/>
 
         <About ref={aboutRef}/>
 
-        <Depositions/>
+        <Depositions ref={depositionsRef}/>
 
-        <Contact/>
+        <Contact ref={contactRef}/>
 
         <Footer/>
       </main>

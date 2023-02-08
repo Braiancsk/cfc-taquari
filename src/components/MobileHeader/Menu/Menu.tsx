@@ -30,9 +30,9 @@ const sidebar = {
     closed: {
       clipPath: `circle(30px at 247px 40px)`,
       transition: {
-        delay: 0.5,
+        delay: 0.1,
         type: "spring",
-        stiffness: 400,
+        stiffness: 500,
         damping: 40
       }
     }

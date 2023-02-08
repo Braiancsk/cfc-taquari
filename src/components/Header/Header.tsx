@@ -18,6 +18,7 @@ import { AnimatePresence, useInView } from "framer-motion";
 import { FixedNavDesktop } from "../FixedNavDesktop/FixedNavDesktop";
 import { HeaderLink } from "./HeaderLink/HeaderLink";
 import { HeaderActive } from "@/@types/HeaderActive.types";
+import { FixedMobileHeader } from "../MobileHeader/FixedMobileHeader/FixedMobileHeader";
 
 const cards = [
   {
@@ -64,12 +65,15 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
     >
      <AnimatePresence>
       {windowWidth! <= 1023 ? (
+        <>
+        {!isHeaderInView && (
+          <FixedMobileHeader />
+        )}
         <MobileHeader/>
+        </>
       ) : (
         <>
-          {isHeaderInView ? (
-            <>
-              <div className="container flex items-center justify-between py-6">
+          <div className="container flex items-center justify-between py-6">
                 <Image
                   src="/LOGO.png"
                   width={194}
@@ -121,9 +125,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
               <HeaderLink active={depositionsActive} text="DEPOIMENTOS" link="depoimentos"/>
               <HeaderLink active={contactActive} text="CONTATO" link="contato"/>
               </nav>
-            </>
-          ) : (
-                <FixedNavDesktop initial={{opacity:0, y:-100}} 
+          {!isHeaderInView &&  <FixedNavDesktop initial={{opacity:0, y:-100}} 
                 homeActive={isHeaderInView}
                 coursesActive={coursesActive}
                 aboutActive={aboutActive}
@@ -131,8 +133,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
                 contactActive={contactActive}
                 transition={{type:'spring'}} 
                 animate={{opacity:1,y:0}} 
-                exit={{opacity:0, y:-100}}/>
-            )}
+                exit={{opacity:0, y:-100}}/> }
         </>
       )}
       </AnimatePresence>
@@ -148,7 +149,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
       </section>
 
       <div className="relative lg:flex justify-center hidden container">
-        <section className="flex lg:flex-row flex-col w-full lg:max-w-[90%] items-center gap-3 bg-white p-3 rounded-lg shadow-2xl lg:absolute top-[180px]">
+        <section className="flex lg:flex-row flex-col w-full lg:max-w-[90%] items-center gap-3 bg-white p-3 rounded-lg shadow-2xl absolute top-[180px]">
           {cards.map((card) => {
             return (
               <HeaderCard

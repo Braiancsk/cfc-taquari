@@ -1,5 +1,5 @@
 export type MenuItemProps = {
     text:string
-    id:string
+    link:string
     onClick:() => void
 }

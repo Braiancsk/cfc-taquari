@@ -21,7 +21,7 @@ const variants = {
   };
 
 
-export const MenuItem = ({text,id,onClick}:MenuItemProps) => {
+export const MenuItem = ({text,link,onClick}:MenuItemProps) => {
 
   return (
     <motion.li
@@ -31,7 +31,7 @@ export const MenuItem = ({text,id,onClick}:MenuItemProps) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <a href={`#${id}`}>{text}</a>
+      <a href={`#${link}`}>{text}</a>
     </motion.li>
   );
 }

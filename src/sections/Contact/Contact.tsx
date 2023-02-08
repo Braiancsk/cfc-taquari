@@ -1,9 +1,9 @@
 import { Button } from '@/components/Button/Button'
 import React from 'react'
 
-export const Contact = () => {
+export const Contact = React.forwardRef((props,ref:any) => {
   return (
-    <section id="contato" className='container grid lg:grid-cols-2 gap-10 lg:gap-2 pb-[67px]'>
+    <section ref={ref} id="contato" className='container grid lg:grid-cols-2 gap-10 lg:gap-2 pb-[67px]'>
         <div className=''>
             <strong className='text-4xl font-semibold text-secondary'>Entre em contato conosco</strong>
             <p className='text-title/80 font-semibold text-sm'>
@@ -34,4 +34,4 @@ export const Contact = () => {
         </form>
     </section>
   )
-}
+})

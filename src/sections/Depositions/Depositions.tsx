@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState,forwardRef } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { ArrowCircleLeft, ArrowCircleRight, Quotes } from "phosphor-react";
 import Image from "next/image";
 
-export const Depositions = () => {
+export const Depositions = forwardRef((props,ref:any) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
@@ -27,6 +27,7 @@ export const Depositions = () => {
 
   return (
     <section
+    ref={ref}
       id="depoimentos"
       className="pt-[91px] pb-[156px] bg-secondary/20 w-full overflow-hidden my-[67px] h-[600px] lg:h-full"
     >
@@ -98,4 +99,4 @@ export const Depositions = () => {
       </div>
     </section>
   );
-};
+})
