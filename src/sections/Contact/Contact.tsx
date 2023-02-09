@@ -3,12 +3,13 @@ import { api } from '@/services/api'
 import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import Swal from 'sweetalert2'
 
 interface FormData {
    name:string
    email:string
    phone:string
-   mensage:string
+   message:string
 }
 export const Contact = React.forwardRef((props,ref:any) => {
    const {mutate,isLoading} = useMutation({
@@ -17,11 +18,24 @@ export const Contact = React.forwardRef((props,ref:any) => {
    const { register, handleSubmit} = useForm<FormData>();
 
     async function sendEmail(payload:FormData){
+      console.log(payload)
       try{
          const {data} = await api.post('/contact',payload)
          console.log(data)
+         Swal.fire({
+            title:'Formulário enviado com sucesso',
+            text:  'Seu email foi enviado. Iremos entrar em contato em breve',
+            icon: 'success',
+            confirmButtonText: 'Tentar novamente'
+          })
       }catch(error:any){
          console.error(error)
+         Swal.fire({
+            title:'Ocorreu um erro ao enviar o formulário',
+            text:  error.response.message,
+            icon: 'error',
+            confirmButtonText: 'Tentar novamente'
+          })
       }
     }
   
@@ -48,11 +62,11 @@ export const Contact = React.forwardRef((props,ref:any) => {
          </div>
          <div className="flex flex-col mt-3">
             <label htmlFor="phone">Telefone</label>
-            <input placeholder='Insira seu número principal' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="phone" />
+            <input {...register("phone")} placeholder='Insira seu número principal' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="phone" />
          </div>
          <div className="flex flex-col mt-3">
             <label htmlFor="phone">Mensagem</label>
-            <textarea placeholder='Deixe uma mensagem' className='min-h-[130px] resize-none rounded-lg py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' id="message"></textarea>
+            <textarea {...register("message")} placeholder='Deixe uma mensagem' className='min-h-[130px] resize-none rounded-lg py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' id="message"></textarea>
          </div>
          <div className="max-w-[320px] ml-auto mt-4">
             <Button isLoading={isLoading} text={isLoading ? 'Enviando' : 'Enviar mensagem'} padding='17px' fontSize='16px'/>

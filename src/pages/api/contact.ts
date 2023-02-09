@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { mailOptions, transporter } from '@/services/nodemailer'
+import NextCors from 'nextjs-cors';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
@@ -21,7 +22,7 @@ const CONTACT_FIELDS:any = {
   message:'Mensage'
 }
 
-const generateEmailContet = (data:RequestData) => {
+const generateEmailContent = (data:RequestData) => {
   const stringData = Object.entries(data).reduce((str:string, [key, val]) => str += `${CONTACT_FIELDS[key]}: \n${val} \n \n`, '')
 
   const htmlData = Object.entries(data).reduce((str:string, [key, val]) => str += `<h1>${CONTACT_FIELDS[key]}</h1> <p>${val}</p>`, '')
@@ -35,6 +36,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  await NextCors(req, res, {
+    // Options
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    origin: '*',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+ });
   if(req.method === 'POST'){
     const data:RequestData = req.body
     if(!data.name || !data.email || !data.phone || !data.message){
@@ -44,9 +51,8 @@ export default async function handler(
     try{
       await transporter.sendMail({
         ...mailOptions,
+        ...generateEmailContent(data),
         subject:'Mensagem do site do CFC Taquari',
-        text:'Esse é um texto',
-        html:'<h1>Test Title</h1> <p>Some body text</p>'
       })
       res.status(200).json({success: true})
     }catch(err:any){
