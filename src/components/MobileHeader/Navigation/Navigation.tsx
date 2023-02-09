@@ -21,7 +21,7 @@ const links = [
         text:'Depoimentos'
     },
     {
-        id:'fale-conosco',
+        id:'contato',
         text:'Fale conosco'
     },
 ]

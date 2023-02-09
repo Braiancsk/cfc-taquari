@@ -4,6 +4,7 @@ import { motion, useCycle } from "framer-motion";
 import { Navigation } from "../Navigation/Navigation";
 import { MenuToggle } from "../MenuToggle/MenuToggle";
 import { useDimensions } from "@/hooks/use-dimensions";
+import { MenuProps } from "./MenuProps.types";
 
 
 let windowW:any
@@ -13,7 +14,7 @@ if (typeof window !== "undefined") {
     windowW = window.innerWidth
 }
 
-export const Menu = () => {
+export const Menu = ({size = '30px', top = '0'}:MenuProps) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
@@ -28,11 +29,11 @@ const sidebar = {
       }
     }),
     closed: {
-      clipPath: `circle(30px at 247px 40px)`,
+      clipPath: `circle(${size} at 247px 40px)`,
       transition: {
-        delay: 0.1,
+        delay: 0.2,
         type: "spring",
-        stiffness: 500,
+        stiffness: 400,
         damping: 40
       }
     }
@@ -42,21 +43,22 @@ const sidebar = {
     <>
     {
         isOpen && (
-            <motion.div  variants={sidebar} animate={isOpen ? "open" : "closed"} onClick={() => toggleOpen()} className="bg-black/50 w-full min-h-screen fixed inset-0 z-10"></motion.div>
+            <motion.div variants={sidebar} animate={isOpen ? "open" : "closed"} onClick={() => toggleOpen()} className="bg-black/50 w-full min-h-screen fixed inset-0 z-10"></motion.div>
         )
     }
 
     <motion.nav
-      className="w-[300px] absolute top-0 right-0 bottom-0 z-20"
+    style={{top:top}}
+      className="w-[300px] fixed-navbar absolute right-0 bottom-0 z-20"
       initial={false}
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
     >
-      <motion.div className="bg-white w-[300px] absolute top-0 right-0 bottom-0" variants={sidebar} />
+      <motion.div className="bg-white w-[300px] fixed-navbar absolute right-0 bottom-0" variants={sidebar} />
       <Navigation isOpen={isOpen} toggle={() => toggleOpen()}/>
       <MenuToggle toggle={() => toggleOpen()} />
     </motion.nav>
     </>
-  );
-};
+  )
+}

@@ -55,21 +55,24 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
   }, []);
 
   const headerRef = useRef<any>(null);
-  const isHeaderInView = useInView(headerRef);
+  const isHeaderInView = useInView(headerRef,{amount:1});
   
 
   return (
     <header
-
+      id="inicio"
       className="bg-hero-bg bg-cover bg-center lg:min-h-[750px]"
     >
      <AnimatePresence>
       {windowWidth! <= 1023 ? (
         <>
         {!isHeaderInView && (
-          <FixedMobileHeader />
+          <FixedMobileHeader top={isHeaderInView ? '0' : '-10px'}/>
         )}
-        <MobileHeader/>
+        {!isHeaderInView ? (
+          <div className="py-[30px]"></div>
+        ) :  <MobileHeader/>}
+       
         </>
       ) : (
         <>
@@ -119,11 +122,11 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
               </div>
 
               <nav className="container flex gap-[10px] items-center text-white my-2">
-              <HeaderLink active={isHeaderInView} text="INÍCIO" link="inicio"/>
-              <HeaderLink active={coursesActive} text="CURSOS" link="cursos"/>
-              <HeaderLink active={aboutActive} text="SOBRE NÓS" link="sobre-nos"/>
-              <HeaderLink active={depositionsActive} text="DEPOIMENTOS" link="depoimentos"/>
-              <HeaderLink active={contactActive} text="CONTATO" link="contato"/>
+              <HeaderLink active={isHeaderInView} text="INÍCIO" link="#inicio"/>
+              <HeaderLink active={coursesActive} text="CURSOS" link="#cursos"/>
+              <HeaderLink active={aboutActive} text="SOBRE NÓS" link="#sobre-nos"/>
+              <HeaderLink active={depositionsActive} text="DEPOIMENTOS" link="#depoimentos"/>
+              <HeaderLink active={contactActive} text="CONTATO" link="#contato"/>
               </nav>
           {!isHeaderInView &&  <FixedNavDesktop initial={{opacity:0, y:-100}} 
                 homeActive={isHeaderInView}
@@ -138,7 +141,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
       )}
       </AnimatePresence>
 
-      <section ref={headerRef} className="container py-[64px] px-4 text-white  text-center">
+      <section ref={headerRef} className="container py-[64px] px-4 text-white text-center">
         <h1 className="text-4xl font-semibold">
           Conclua seus cursos em tempo recorde
         </h1>

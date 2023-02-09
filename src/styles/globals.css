@@ -11,3 +11,7 @@ body{
     background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(0,0,0,0.0) 80%);
     
 }
+
+.fixed-navbar{
+    min-height: calc(100vh + 10px);
+}

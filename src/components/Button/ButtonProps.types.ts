@@ -4,4 +4,5 @@ export type ButtonProps = {
     href?:string
     padding?:string
     fontSize?:string
+    isLoading?:boolean
 }

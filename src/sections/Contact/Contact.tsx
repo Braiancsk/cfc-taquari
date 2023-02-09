@@ -1,7 +1,33 @@
 import { Button } from '@/components/Button/Button'
+import { api } from '@/services/api'
+import { useMutation } from '@tanstack/react-query'
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
+interface FormData {
+   name:string
+   email:string
+   phone:string
+   mensage:string
+}
 export const Contact = React.forwardRef((props,ref:any) => {
+   const {mutate,isLoading} = useMutation({
+      mutationFn:(data:FormData) => sendEmail(data)
+   })
+   const { register, handleSubmit} = useForm<FormData>();
+
+    async function sendEmail(payload:FormData){
+      try{
+         const {data} = await api.post('/contact',payload)
+         console.log(data)
+      }catch(error:any){
+         console.error(error)
+      }
+    }
+  
+  function onSubmit(data:FormData){
+    mutate(data)
+  }
   return (
     <section ref={ref} id="contato" className='container grid lg:grid-cols-2 gap-10 lg:gap-2 pb-[67px]'>
         <div className=''>
@@ -11,25 +37,25 @@ export const Contact = React.forwardRef((props,ref:any) => {
             </p>
         </div>
 
-        <form className='p-5 bg-secondary rounded-lg text-white'>
+        <form onSubmit={handleSubmit(onSubmit)} className='p-5 bg-secondary rounded-lg text-white'>
          <div className="flex flex-col">
             <label htmlFor="name">Nome</label>
-            <input placeholder='Insira seu nome completo' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="name" />
+            <input {...register("name")} placeholder='Insira seu nome completo' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="name" />
          </div>
          <div className="flex flex-col mt-3">
             <label htmlFor="email">Email</label>
-            <input placeholder='Insira seu melhor E-mail' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="email" id="email" />
+            <input {...register("email")} placeholder='Insira seu melhor E-mail' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="email" id="email" />
          </div>
          <div className="flex flex-col mt-3">
             <label htmlFor="phone">Telefone</label>
             <input placeholder='Insira seu número principal' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="phone" />
          </div>
          <div className="flex flex-col mt-3">
-            <label htmlFor="phone">Telefone</label>
+            <label htmlFor="phone">Mensagem</label>
             <textarea placeholder='Deixe uma mensagem' className='min-h-[130px] resize-none rounded-lg py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' id="message"></textarea>
          </div>
          <div className="max-w-[320px] ml-auto mt-4">
-            <Button text='Enviar mensagem' padding='10px' fontSize='16px'/>
+            <Button isLoading={isLoading} text={isLoading ? 'Enviando' : 'Enviar mensagem'} padding='17px' fontSize='16px'/>
          </div>
         </form>
     </section>

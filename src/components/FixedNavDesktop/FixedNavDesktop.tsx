@@ -19,13 +19,13 @@ const MotionFixedNavDesktop = React.forwardRef((props:FixedNavProps, ref: any) =
     >
       <div className="container flex justify-between items-center h-full">
         <Image
-          src="/LOGO.png"
+          src="/logo-dark.png"
           width={194}
           height={41}
           alt="Logo da empresa CFC Taquari"
         />
 
-        <ul className="container flex gap-[5px] items-center text-white my-2 text-title/80">
+        <ul className="container flex gap-[5px] items-center text-white my-2 text-title/80 justify-end">
           <li>
             <HeaderLink text="INÍCIO" link="#inicio" active={props.homeActive} />
           </li>
