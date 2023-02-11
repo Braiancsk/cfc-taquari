@@ -5,30 +5,12 @@ import React from 'react'
 
 const courses = [
   {
-    title:'Primeiros socorros',
+    id:'1',
+    title:'RECICLAGEM PARA CONDUTORES INFRATORES',
     link:'https://google.com',
     imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
   },
-  {
-    title:'Primeiros socorros',
-    link:'https://google.com',
-    imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-  },
-  {
-    title:'Primeiros socorros',
-    link:'https://google.com',
-    imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-  },
-  {
-    title:'Primeiros socorros',
-    link:'https://google.com',
-    imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-  },
-  {
-    title:'Primeiros socorros',
-    link:'https://google.com',
-    imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-  },
+  
 ]
 
 export const Courses = React.forwardRef((props,ref:any) => {
@@ -42,7 +24,7 @@ export const Courses = React.forwardRef((props,ref:any) => {
               <CourseCard
               key={index}
               title={course.title}
-              link={course.link}
+              link={`/inscricao/${course.id}`}
               imageUrl={course.imageUrl}
               />
             )

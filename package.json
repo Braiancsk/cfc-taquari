@@ -22,6 +22,7 @@
     "next": "13.1.6",
     "nextjs-cors": "^2.1.2",
     "nodemailer": "^6.9.1",
+    "pagarme": "^4.30.0",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
