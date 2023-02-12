@@ -5,6 +5,7 @@ import { FacebookLogo, InstagramLogo, Phone } from 'phosphor-react'
 import Image from 'next/image'
 import { MobileHeader } from '@/components/MobileHeader/MobileHeader'
 import { Button } from '@/components/Button/Button'
+import { Input } from '@/components/Input/Input'
 
 export default function index() {
   const router = useRouter()
@@ -79,11 +80,30 @@ export default function index() {
 
               <div className="container min-h-[130px]">
               <h1 className='text-white text-3xl'>Curso {id}</h1>
-              <div className='mt-3 max-w-[221px] w-full'>
-              <Button text='Quero me inscrever' href='#inscricao' variant='primary'/>
-              </div>
+       
               </div>
       </header>
+
+      <section className="container">
+        <h2 className='mt-7 text-3xl font-semibold text-title'>Preencha os dados abaixo para fazer a matricula</h2>
+        <p className='text-title/80'>Após preencher os dados, você deverá realizar o pagamento para que a matricula seja concluída</p>
+     
+        <form className='flex flex-col gap-2 my-7 max-w-[800px]'>
+          <div className="flex items-center gap-3">
+          <Input
+          type='text'
+          placeholder='Insira seu nome completo'
+          label='Nome'
+          />
+          <Input
+          type='email'
+          placeholder='Insira seu melhor Email'
+          label='E-mail'
+          />
+
+          </div>
+        </form>
+      </section>
     </main>
   )
 }
