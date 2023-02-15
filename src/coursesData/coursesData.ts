@@ -5,7 +5,7 @@ export const courses = [
             slug:"reciclagem-para-condutores",
             codigoCurso:1,
             code:"1",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:347.40,
             image_url:"",
         },
         {
@@ -13,7 +13,7 @@ export const courses = [
             slug:"atualizacao-para-condutores-de-veiculos-de-transporte-de-escolares",
             codigoCurso:2,
             code:"2",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:220,
             image_url:"",
         },
         {
@@ -21,7 +21,7 @@ export const courses = [
             slug:"atualizacao-para-condutores-de-veiculos-de-transporte-coletivo-de-escolares-passageiros",
             codigoCurso:3,
             code:"3",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:220,
             image_url:"",
         },
         {
@@ -29,7 +29,7 @@ export const courses = [
             slug:"atualizacao-para-condutores-de-veiculos-de-transporte-de-cargas-de-produtos-perigosos",
             codigoCurso:4,
             code:"4",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:220,
             image_url:"",
         },
         {
@@ -37,7 +37,7 @@ export const courses = [
             slug:"atualizacao-para-condutores-de-veiculos-de-transporte-de-emergenia",
             codigoCurso:5,
             code:"5",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:220,
             image_url:"",
         },
         {
@@ -45,7 +45,7 @@ export const courses = [
             slug:"atualizacao-para-condutores-de-veiculos-de-transporte-de-cargas-indivisiveis",
             codigoCurso:6,
             code:"6",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:220,
             image_url:"",
         },
         {
@@ -53,7 +53,7 @@ export const courses = [
             slug:"curso-para-condutores-de-veiculo-de-transporte-de-carga-indivisivel-e-outras",
             codigoCurso:7,
             code:"7",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -61,7 +61,7 @@ export const courses = [
             slug:"curso-para-condutores-de-veiculo-de-transporte-de-produtos-perigosos",
             codigoCurso:8,
             code:"8",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -69,7 +69,7 @@ export const courses = [
             slug:"curso-para-condutores-de-veiculo-de-transporte-coletivo",
             codigoCurso:9,
             code:"9",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -77,7 +77,7 @@ export const courses = [
             slug:"curso-para-condutores-de-veiculo-de-transporte-de-escolares",
             codigoCurso:10,
             code:"10",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -85,7 +85,7 @@ export const courses = [
             slug:"curso-para-condutores-de-veiculo-de-transporte-de-emergencia",
             codigoCurso:11,
             code:"11",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -93,7 +93,7 @@ export const courses = [
             slug:"primeira-habilitacao-online",
             codigoCurso:14,
             code:"14",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -101,7 +101,7 @@ export const courses = [
             slug:"curso-de-atualizacao-para-renovacao-da-cnh",
             codigoCurso:16,
             code:"16",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
         {
@@ -109,7 +109,7 @@ export const courses = [
             slug:"curso-preventivo-de-reciclagem",
             codigoCurso:17,
             code:"17",
-            amount:100*297, //100 = R$1,00 * quantos reais você deseja
+            amount:490,
             image_url:"",
         },
     ]

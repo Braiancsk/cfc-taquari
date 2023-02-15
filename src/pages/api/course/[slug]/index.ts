@@ -19,11 +19,11 @@ export default async function handler(
     // Options
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+
  });
   if(req.method === 'GET'){
-    console.log(req.query)
-    const course = courses.find(course => course.slug === req.query.slug)
+    const {slug} = req.query
+    const course = courses.find(course => course.slug === slug)
     res.status(200).json({ data: course })
   }
   

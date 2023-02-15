@@ -5,16 +5,18 @@ import { FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
 import Image from "next/image";
 import { MobileHeader } from "@/components/MobileHeader/MobileHeader";
 import InputMask from 'react-input-mask';
-{/*@ts-ignore*/}
-import pagarme from "pagarme";
 import { useForm, Controller } from "react-hook-form";
 import { api } from "@/services/api";
 import axios from "axios";
 import { removeMask } from "@/utils/removeMask";
-import { format } from "date-fns";
-import { GetStaticPaths } from "next";
+import { format, formatISO, isValid } from "date-fns";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { CoursesDataTypes } from "@/@types/CoursesDataTypes.types";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { currencyFormater } from "@/utils/currencyFormater";
+import { isValidCPF } from "@/utils/validateCpf";
+import { ErrorMessage } from "@hookform/error-message";
 
 interface FormData {
   nome: string;
@@ -30,26 +32,50 @@ interface FormData {
   cidade: string;
 }
 
-export default function index() {
-  const router = useRouter();
-  const { id } = router.query;
-  const {data} = useQuery({ queryKey: ['course'], queryFn: getCourse,enabled:!!id })
-  async function getCourse(){
-    try{
-        const {data} = await api.get(`/course/${id}`)
-        const course:CoursesDataTypes = data.course
-        console.log(course)
-        return course
-    }catch(error:any){
-      console.error(error)
-    }
+interface ContextProps {
+  course:CoursesDataTypes
+}
+
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  // Call an external API endpoint to get posts
+  const {data} = await api.get(`/courses`)
+  const courses:CoursesDataTypes[] = data.courses
+
+  // Get the paths we want to prerender based on posts
+  // In production environments, prerender all pages
+  // (slower builds, but faster initial page load)
+  const paths = courses.map((post) => ({
+    params: { slug: post.slug },
+  }))
+
+  // { fallback: false } means other routes should 404
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps<{ course: CoursesDataTypes }> = async ({params}:any) => {
+  const {slug} = params
+  const {data} = await api.get(`/course/${slug}`)
+  const course:CoursesDataTypes = data.data
+
+  return {
+    props: {
+      course:course ?? []
+    },
   }
+}
+export default function index({course}:ContextProps) {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
-    setValue
+    setValue,
+    setError,
+    clearErrors
   } = useForm<FormData>();
 
   const [windowWidth, setWindowWidth] = useState<null | number>(null);
@@ -74,7 +100,6 @@ export default function index() {
 
     const pagarmePayload = {
       customer: {
-        codigoCurso:data?.codigoCurso,
         name: getValues("nome"),
         email: getValues("email"),
         document:removeMask(getValues('cpf')),
@@ -90,7 +115,7 @@ export default function index() {
         birthday: convertDateToApi(getValues('nascimento')),
         metadata: {
           codigoCFC: "1",
-          codigoCurso: id,
+          codigoCurso: course.codigoCurso,
           nome: getValues("nome"),
           email: getValues("email"),
           cpf: getValues("cpf"),
@@ -108,7 +133,6 @@ export default function index() {
 
     try {
       const { data } = await api.post("/checkout", pagarmePayload);
-
       console.log(data);
     } catch (error: any) {
       console.error(error);
@@ -121,7 +145,6 @@ export default function index() {
         const { data } = await axios.get(
           `https://viacep.com.br/viacep.com.br/ws/${removeMask(e.target.value)}/json/`
         );
-        console.log(data);
         setValue('endereco',data.logradouro)
         setValue('complemento',data.complemento)
         setValue('bairro',data.bairro)
@@ -137,15 +160,17 @@ export default function index() {
   return (
     <main>
       <header className="bg-secondary min-h-[400px] flex flex-col justify-between">
-        {windowWidth! >= 1023 ? (
-          <div>
-            <div className="container flex items-center justify-between py-6">
+      <div className="container flex items-center justify-between py-6">
+
+              <Link href="/">
               <Image
                 src="/LOGO.png"
                 width={194}
                 height={41}
                 alt="Logo da empresa CFC Taquari"
               />
+              </Link>
+         
 
               <div className="flex gap-6 items-center">
                 <div className="flex gap-2">
@@ -184,29 +209,19 @@ export default function index() {
               </div>
             </div>
 
-            <nav className="container flex gap-[10px] items-center text-white my-2">
-              <HeaderLink active={false} text="INÍCIO" link="#inicio" />
-              <HeaderLink active={false} text="CURSOS" link="#cursos" />
-              <HeaderLink active={false} text="SOBRE NÓS" link="#sobre-nos" />
-              <HeaderLink
-                active={false}
-                text="DEPOIMENTOS"
-                link="#depoimentos"
-              />
-              <HeaderLink active={false} text="CONTATO" link="#contato" />
-            </nav>
-          </div>
-        ) : (
-          <MobileHeader />
-        )}
-
         <div className="container min-h-[130px]">
-          <h1 className="text-white text-3xl">Curso {data?.title}</h1>
+          <h1 className="text-white text-3xl">Curso: {course.title}</h1>
         </div>
       </header>
 
-      <section className="container">
-        <h2 className="mt-7 text-3xl font-semibold text-title">
+      <section className="container grid lg:grid-cols-2 gap-5 mt-7">
+        <div className="bg-white shadow-md rounded-lg p-4 h-max flex flex-col gap-3">
+          <strong className="text-title text-lg block">Curso: {course.title}</strong>
+          <strong className="text-title text-lg block">Valor: {currencyFormater(course.amount)}</strong>
+        </div>
+
+        <div className="bg-white shadow-md rounded-lg p-4">
+        <h2 className="text-3xl font-semibold text-title">
           Preencha os dados abaixo para fazer a matricula
         </h2>
         <p className="text-title/80">
@@ -239,7 +254,15 @@ export default function index() {
               </label>
               <InputMask
                 mask="999.999.999-99"
-                {...register("cpf")}
+                {...register("cpf",{
+                  onChange:(e) => {
+                    if(!isValidCPF(removeMask(e.target.value))){
+                      setError('cpf',{message:'Insira um cpf válido'})
+                    }else{
+                      clearErrors('cpf')
+                    }
+                  }
+                })}
                 id="cpf"
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
@@ -283,7 +306,15 @@ export default function index() {
               </label>
               <InputMask
                 mask="99/99/9999"
-                {...register("nascimento")}
+                {...register("nascimento",{
+                  onChange:(e) => {
+                    if(!isValid(format(new Date(e.target.value),'MM/dd/yyyy'))){
+                      setError('nascimento',{message:'Insira uma data válida'})
+                    }else{
+                      clearErrors('nascimento')
+                    }
+                  }
+                })}
                 id="nascimento"
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
@@ -384,6 +415,16 @@ export default function index() {
           </>
           )}
 
+      <ErrorMessage
+        errors={errors}
+        name="cpf"
+        render={({ message }) => <p className="py-1 px-2 bg-red-800 rounded-full text-center text-white w-max">{message}</p>}
+      />
+      <ErrorMessage
+        errors={errors}
+        name="nascimento"
+        render={({ message }) => <p className="py-1 px-2 bg-red-800 rounded-full text-center text-white w-max">{message}</p>}
+      />
 
           <button
             type="submit"
@@ -392,6 +433,7 @@ export default function index() {
             Adquirir curso
           </button>
         </form>
+        </div>
       </section>
     </main>
   );

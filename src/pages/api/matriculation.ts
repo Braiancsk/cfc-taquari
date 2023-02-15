@@ -19,7 +19,7 @@ export default async function handler(
     origin: '*',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
  });
-  console.log(req)
+  console.log(req.body)
   
   return res.status(400).json({ message: 'Ocorreu um erro' })
 }
