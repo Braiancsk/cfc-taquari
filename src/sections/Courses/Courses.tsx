@@ -1,31 +1,22 @@
+import { CoursesDataTypes } from '@/@types/CoursesDataTypes.types'
 import { Button } from '@/components/Button/Button'
 import { CourseCard } from '@/components/CourseCard/CourseCard'
 import React from 'react'
 
 
-const courses = [
-  {
-    id:'1',
-    title:'RECICLAGEM PARA CONDUTORES INFRATORES',
-    link:'https://google.com',
-    imageUrl:'https://images.unsplash.com/photo-1563260324-5ebeedc8af7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-  },
-  
-]
-
-export const Courses = React.forwardRef((props,ref:any) => {
+export const Courses = React.forwardRef(({courses}:any,ref:any) => {
   return (
     <section ref={ref} id="cursos" className='pt-[67px] lg:pt-[227px] pb-[67px]'>
         <h2  className='text-secondary font-semibold text-4xl text-center'>Cursos</h2>
 
         <div className="container grid md:grid-cols-3 lg:grid-cols-4 items-center gap-4 py-[51px] relative">
-          {courses.map((course,index) => {
+          {courses?.map((course:CoursesDataTypes) => {
             return (
               <CourseCard
-              key={index}
+              key={course.codigoCurso}
               title={course.title}
-              link={`/inscricao/${course.id}`}
-              imageUrl={course.imageUrl}
+              link={`/inscricao/${course.slug}`}
+              imageUrl={course.image_url}
               />
             )
           })}

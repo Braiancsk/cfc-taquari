@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { pagarmeApi } from './../../services/pagarmeApi';
 import NextCors from 'nextjs-cors';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { format } from 'date-fns';
 
 type Data = {
   message?: string
   success?:any
+  data?:any
 }
 
 
@@ -21,14 +22,54 @@ export default async function handler(
  });
 
  if(req.method === 'POST'){
+  const date = new Date();
+  const boletoDueAt = format(new Date(date.setDate(date.getDate() + 3 /*days*/)), 'MM/dd/yyyy') 
+
+    const items =  [
+      {
+        code:'1',
+        amount: 100*297, //100 = R$1,00 * quantos reais você deseja
+        quantity:1,
+        description:'Item de teste'
+      }
+    ]
+
+    const payments = [
+      {
+        payment_method: "checkout",
+        checkout: {
+          expires_in: 120,
+          billing_address_editable: false,
+          customer_editable: true,
+          accepted_payment_methods: ["credit_card", "boleto", "pix"],
+          success_url: "http://localhost:3000/obrigado",
+          boleto:{
+            instructions:'Vencimento do boleto acontece em 3 dias. Pague o quanto antes para que possamos confirmar sua matrícula',
+            due_at:boletoDueAt,
+          },
+          pix:{
+            expires_in:60*30,
+          }
+        },
+    
+      },
+    ]
+
+    const pagarmePayload = {
+      items:items,
+      payments:payments,
+      ...req.body
+    }
+    console.log(pagarmePayload)
+
      try{
-     const {data} = await axios.post('https://api.pagar.me/core/v5/orders',req.body,{
+     const {data} = await axios.post('https://api.pagar.me/core/v5/orders',pagarmePayload,{
       headers: {               
         Authorization: 'Basic ' + Buffer.from(`${process.env.PAGARME_SK}:`).toString('base64'),           
       },
      })
       console.log(data)
-      return res.status(200).json({ message:data })
+      return res.status(200).json({ data })
      }catch(error:any){
       console.error(JSON.stringify(error.response.data.errors))
       return res.status(400).json({ message:error.response.data })

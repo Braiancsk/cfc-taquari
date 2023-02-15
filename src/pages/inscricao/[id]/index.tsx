@@ -12,6 +12,9 @@ import { api } from "@/services/api";
 import axios from "axios";
 import { removeMask } from "@/utils/removeMask";
 import { format } from "date-fns";
+import { GetStaticPaths } from "next";
+import { CoursesDataTypes } from "@/@types/CoursesDataTypes.types";
+import { useQuery } from "@tanstack/react-query";
 
 interface FormData {
   nome: string;
@@ -28,6 +31,19 @@ interface FormData {
 }
 
 export default function index() {
+  const router = useRouter();
+  const { id } = router.query;
+  const {data} = useQuery({ queryKey: ['course'], queryFn: getCourse,enabled:!!id })
+  async function getCourse(){
+    try{
+        const {data} = await api.get(`/course/${id}`)
+        const course:CoursesDataTypes = data.course
+        console.log(course)
+        return course
+    }catch(error:any){
+      console.error(error)
+    }
+  }
   const {
     register,
     handleSubmit,
@@ -35,8 +51,7 @@ export default function index() {
     getValues,
     setValue
   } = useForm<FormData>();
-  const router = useRouter();
-  const { id } = router.query;
+
   const [windowWidth, setWindowWidth] = useState<null | number>(null);
   const [isCpfValid, setIsCpfValid] = useState(false)
 
@@ -57,26 +72,9 @@ export default function index() {
     const date = new Date();
     const boletoDueAt = format(new Date(date.setDate(date.getDate() + 3 /*days*/)), 'MM/dd/yyyy') 
 
-    const studentPayload = {
-      aluno: {
-        codigoCFC: "1",
-        codigoCurso: id,
-        nome: getValues("nome"),
-        email: getValues("email"),
-        cpf: getValues("cpf"),
-        telefone: getValues("telefone"),
-        nascimento: getValues("nascimento"),
-        cep: getValues("cep"),
-        endereco: getValues("endereco"),
-        numero: getValues("numero"),
-        complemento: getValues("complemento"),
-        bairro: getValues("bairro"),
-        cidade: getValues("cidade"),
-      },
-    };
-
     const pagarmePayload = {
       customer: {
+        codigoCurso:data?.codigoCurso,
         name: getValues("nome"),
         email: getValues("email"),
         document:removeMask(getValues('cpf')),
@@ -106,35 +104,8 @@ export default function index() {
           cidade: getValues("cidade"),
         },
       },
-      items:[
-        {
-          amount: 3000,
-          quantity:1,
-          description:'Item de teste'
-        }
-      ],
-      payments: [
-        {
-          payment_method: "checkout",
-          checkout: {
-            expires_in: 120,
-            billing_address_editable: false,
-            customer_editable: true,
-            accepted_payment_methods: ["credit_card", "boleto", "pix"],
-            success_url: "http://localhost:3000/obrigado",
-            boleto:{
-              instructions:'Vencimento do boleto acontece em 3 dias. Pague o quanto antes para que possamos confirmar sua matrícula',
-              due_at:boletoDueAt,
-            },
-            pix:{
-              expires_in:60*30,
-            }
-          },
-      
-        },
-      ],
     };
-    console.log(pagarmePayload);
+
     try {
       const { data } = await api.post("/checkout", pagarmePayload);
 
@@ -230,7 +201,7 @@ export default function index() {
         )}
 
         <div className="container min-h-[130px]">
-          <h1 className="text-white text-3xl">Curso {id}</h1>
+          <h1 className="text-white text-3xl">Curso {data?.title}</h1>
         </div>
       </header>
 

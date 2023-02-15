@@ -9,10 +9,26 @@ import { Contact } from '@/sections/Contact/Contact'
 import { Footer } from '@/sections/Footer/Footer'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
+import { api } from '@/services/api'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { CoursesDataTypes } from '@/@types/CoursesDataTypes.types'
 
 
+export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = async (
+  context
+) => {
+  const {data} = await api.get('/courses')
+  const courses:CoursesDataTypes[] = data.courses
+  console.log(courses)
+  return {
+    props: {
+      courses:courses
+    },
+  }
+}
 
-export default function Home() {
+
+export default function Home({courses}:any) {
 
   const coursesRef = useRef<any>(null);
   const isCoursesInView = useInView(coursesRef,{amount:0.3});
@@ -43,7 +59,7 @@ export default function Home() {
       contactActive={isContactInView}
       />
 
-        <Courses ref={coursesRef}/>
+        <Courses ref={coursesRef} courses={courses}/>
 
         <About ref={aboutRef}/>
 
