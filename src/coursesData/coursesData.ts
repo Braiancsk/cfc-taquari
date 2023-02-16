@@ -6,7 +6,7 @@ export const courses = [
             codigoCurso:1,
             code:"1",
             amount:347.40,
-            image_url:"",
+            image_url:"/RECICLAGEM.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE ESCOLARES",
@@ -14,7 +14,7 @@ export const courses = [
             codigoCurso:2,
             code:"2",
             amount:220,
-            image_url:"",
+            image_url:"/ATUALIZAÇÃO ESCOLAR.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE COLETIVO DE PASSAGEIROS",
@@ -22,7 +22,7 @@ export const courses = [
             codigoCurso:3,
             code:"3",
             amount:220,
-            image_url:"",
+            image_url:"/ATUALIZAÇÃO COLETIVO.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE CARGAS DE PRODUTOS PERIGOSOS",
@@ -30,7 +30,7 @@ export const courses = [
             codigoCurso:4,
             code:"4",
             amount:220,
-            image_url:"",
+            image_url:"/ATUALIZAÇÃO MOPP.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE EMERGÊNCIA",
@@ -38,7 +38,7 @@ export const courses = [
             codigoCurso:5,
             code:"5",
             amount:220,
-            image_url:"",
+            image_url:"/ATUALIZAÇÃO TRANSPORTE DE EMERGENCIA.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE CARGAS INDIVISÍVEIS",
@@ -46,7 +46,7 @@ export const courses = [
             codigoCurso:6,
             code:"6",
             amount:220,
-            image_url:"",
+            image_url:"/Atualização Indivisíveis.png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE CARGA INDIVISÍVEL E OUTRAS",
@@ -54,7 +54,7 @@ export const courses = [
             codigoCurso:7,
             code:"7",
             amount:490,
-            image_url:"",
+            image_url:"/INDIVISÍVEIS.png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE PRODUTOS PERIGOSOS",
@@ -62,7 +62,7 @@ export const courses = [
             codigoCurso:8,
             code:"8",
             amount:490,
-            image_url:"",
+            image_url:"/CARGAS PERIGOSAS (MOPP).png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE COLETIVO",
@@ -70,7 +70,7 @@ export const courses = [
             codigoCurso:9,
             code:"9",
             amount:490,
-            image_url:"",
+            image_url:"/COLETIVO.png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE ESCOLARES",
@@ -78,7 +78,7 @@ export const courses = [
             codigoCurso:10,
             code:"10",
             amount:490,
-            image_url:"",
+            image_url:"/ESCOLAR.png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE EMERGÊNCIA",
@@ -86,30 +86,7 @@ export const courses = [
             codigoCurso:11,
             code:"11",
             amount:490,
-            image_url:"",
+            image_url:"/EMERGÊNCIA.png",
         },
-        {
-            title:"PRIMEIRA HABILITAÇÃO ONLINE – AULAS REMOTAS EAD",
-            slug:"primeira-habilitacao-online",
-            codigoCurso:14,
-            code:"14",
-            amount:490,
-            image_url:"",
-        },
-        {
-            title:"CURSO DE ATUALIZAÇÃO PARA RENOVAÇÃO DA CNH",
-            slug:"curso-de-atualizacao-para-renovacao-da-cnh",
-            codigoCurso:16,
-            code:"16",
-            amount:490,
-            image_url:"",
-        },
-        {
-            title:"CURSO PREVENTIVO DE RECICLAGEM",
-            slug:"curso-preventivo-de-reciclagem",
-            codigoCurso:17,
-            code:"17",
-            amount:490,
-            image_url:"",
-        },
+     
     ]

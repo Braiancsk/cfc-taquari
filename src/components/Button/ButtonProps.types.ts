@@ -1,4 +1,5 @@
 export type ButtonProps = {
+    onClick:() => void
     text:string
     variant?:'primary' | 'secondary'
     href?:string

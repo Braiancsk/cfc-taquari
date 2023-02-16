@@ -9,7 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 import { api } from "@/services/api";
 import axios from "axios";
 import { removeMask } from "@/utils/removeMask";
-import { format, formatISO, isValid } from "date-fns";
+import { format, isValid } from "date-fns";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { CoursesDataTypes } from "@/@types/CoursesDataTypes.types";
 import { useQuery } from "@tanstack/react-query";
@@ -85,18 +85,23 @@ export default function index({course}:ContextProps) {
     setWindowWidth(window.innerWidth);
   }, []);
 
-  function convertDateToApi(date:string){
+  function convertDateToPagarme(date:string){
     const splitDate = date.split('/')
     const dd = splitDate[0]
     const mm = splitDate[1]
     const yy = splitDate[2]
     return `${mm}/${dd}/${yy}` 
   }
+  function convertDateToUnicfc(date:string){
+    const splitDate = date.split('/')
+    const dd = splitDate[0]
+    const mm = splitDate[1]
+    const yy = splitDate[2]
+    return `${yy}-${mm}-${dd}` 
+  }
 
 
   async function createCheckout() {
-    const date = new Date();
-    const boletoDueAt = format(new Date(date.setDate(date.getDate() + 3 /*days*/)), 'MM/dd/yyyy') 
 
     const pagarmePayload = {
       customer: {
@@ -112,7 +117,7 @@ export default function index({course}:ContextProps) {
             number: removeMask(getValues('telefone')).substring(3,removeMask(getValues('telefone')).length),
           },
         },
-        birthday: convertDateToApi(getValues('nascimento')),
+        birthday: convertDateToPagarme(getValues('nascimento')),
         metadata: {
           codigoCFC: "1",
           codigoCurso: course.codigoCurso,
@@ -120,7 +125,7 @@ export default function index({course}:ContextProps) {
           email: getValues("email"),
           cpf: getValues("cpf"),
           telefone: getValues("telefone"),
-          nascimento: getValues("nascimento"),
+          nascimento: convertDateToUnicfc(getValues("nascimento")),
           cep: getValues("cep"),
           endereco: getValues("endereco"),
           numero: getValues("numero"),
@@ -131,15 +136,22 @@ export default function index({course}:ContextProps) {
       },
     };
 
+    if(errors.cpf || errors.nascimento || errors.telefone || errors.cep) return
     try {
       const { data } = await api.post("/checkout", pagarmePayload);
       console.log(data);
+      window.location.href = data.data.checkouts[0].payment_url
     } catch (error: any) {
       console.error(error);
     }
   }
 
   async function getAddress(e: React.ChangeEvent<HTMLInputElement>) {
+    if(e.target.value.includes('_')){
+      setError('cep',{message:'Insira um CEP válido'})
+    }else{
+      clearErrors('cep')
+    }
     try {
       if (!e.target.value.includes('_')) {
         const { data } = await axios.get(
@@ -215,9 +227,19 @@ export default function index({course}:ContextProps) {
       </header>
 
       <section className="container grid lg:grid-cols-2 gap-5 mt-7">
-        <div className="bg-white shadow-md rounded-lg p-4 h-max flex flex-col gap-3">
+        <div className="bg-white shadow-md rounded-lg p-4 h-max flex gap-3">
+             <Image
+                src={course.image_url}
+                width={300}
+                height={600}
+                className="object-cover"
+                alt="Logo da empresa CFC Taquari"
+              />
+
+          <div className="flex flex-col gap-3">
           <strong className="text-title text-lg block">Curso: {course.title}</strong>
           <strong className="text-title text-lg block">Valor: {currencyFormater(course.amount)}</strong>
+          </div>
         </div>
 
         <div className="bg-white shadow-md rounded-lg p-4">
@@ -267,6 +289,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira seu CPF"
+                required
               />
             </div>
           </div>
@@ -281,6 +304,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="email"
                 placeholder="Insira seu melhor email"
+                required
               />
             </div>
 
@@ -290,11 +314,20 @@ export default function index({course}:ContextProps) {
               </label>
               <InputMask
                 mask="(99) 99999-9999"
-                {...register("telefone")}
+                {...register("telefone",{
+                  onChange:(e) => {
+                    if(e.target.value.includes('_')){
+                      setError('telefone',{message:'Insira um telefone válido'})
+                    }else{
+                      clearErrors('telefone')
+                    }
+                  }
+                })}
                 id="telefone"
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira seu telefone"
+                required
               />
             </div>
           </div>
@@ -308,7 +341,7 @@ export default function index({course}:ContextProps) {
                 mask="99/99/9999"
                 {...register("nascimento",{
                   onChange:(e) => {
-                    if(!isValid(format(new Date(e.target.value),'MM/dd/yyyy'))){
+                    if(!isValid(new Date(e.target.value))){
                       setError('nascimento',{message:'Insira uma data válida'})
                     }else{
                       clearErrors('nascimento')
@@ -319,6 +352,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira sua data de nascimento"
+                required
               />
             </div>
 
@@ -335,6 +369,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira seu CEP"
+                required
               />
             </div>
           </div>
@@ -352,6 +387,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira seu endereço"
+                required
               />
             </div>
 
@@ -365,6 +401,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="number"
                 placeholder="Insira seu número"
+                required
               />
             </div>
           </div>
@@ -393,6 +430,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira seu bairro"
+                required
               />
             </div>
           </div>
@@ -408,6 +446,7 @@ export default function index({course}:ContextProps) {
                 className="transition placeholder:text-sm placeborder:text-title/80 border border-gray-800 focus:outline-0 focus:ring focus:ring-secondary p-2 rounded-lg"
                 type="text"
                 placeholder="Insira sua cidade"
+                required
               />
             </div>
           </div>
@@ -418,6 +457,11 @@ export default function index({course}:ContextProps) {
       <ErrorMessage
         errors={errors}
         name="cpf"
+        render={({ message }) => <p className="py-1 px-2 bg-red-800 rounded-full text-center text-white w-max">{message}</p>}
+      />
+      <ErrorMessage
+        errors={errors}
+        name="telefone"
         render={({ message }) => <p className="py-1 px-2 bg-red-800 rounded-full text-center text-white w-max">{message}</p>}
       />
       <ErrorMessage
