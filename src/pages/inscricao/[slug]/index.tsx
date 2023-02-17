@@ -63,7 +63,8 @@ export const getStaticProps: GetStaticProps<{ course: CoursesDataTypes }> = asyn
     },
   }
 }
-export default function index({course}:ContextProps) {
+
+export default function Slug({course}:ContextProps) {
   const router = useRouter();
 
   const {
