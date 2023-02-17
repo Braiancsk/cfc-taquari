@@ -15,7 +15,7 @@ import { Button } from "../Button/Button";
 import { HeaderCard } from "../HeaderCard/HeaderCard";
 import { MobileHeader } from "../MobileHeader/MobileHeader";
 import { AnimatePresence, useInView } from "framer-motion";
-import { FixedNavDesktop } from "../FixedNavDesktop/FixedNavDesktop";
+import FixedNavDesktop from "../FixedNavDesktop/FixedNavDesktop";
 import { HeaderLink } from "./HeaderLink/HeaderLink";
 import { HeaderActive } from "@/@types/HeaderActive.types";
 import { FixedMobileHeader } from "../MobileHeader/FixedMobileHeader/FixedMobileHeader";

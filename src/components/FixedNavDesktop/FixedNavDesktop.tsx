@@ -47,6 +47,8 @@ const MotionFixedNavDesktop = React.forwardRef((props:FixedNavProps, ref: any) =
   );
 });
 
-export const FixedNavDesktop = motion(MotionFixedNavDesktop, {
+const FixedNavDesktop = motion(MotionFixedNavDesktop, {
   forwardMotionProps: true,
 });
+
+export default FixedNavDesktop
