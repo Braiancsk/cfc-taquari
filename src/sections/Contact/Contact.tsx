@@ -3,6 +3,7 @@ import { api } from '@/services/api'
 import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import InputMask from 'react-input-mask';
 import Swal from 'sweetalert2'
 
 interface FormData {
@@ -62,7 +63,7 @@ export const Contact = React.forwardRef((props,ref:any) => {
          </div>
          <div className="flex flex-col mt-3">
             <label htmlFor="phone">Telefone</label>
-            <input {...register("phone")} placeholder='Insira seu número principal' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="phone" />
+            <InputMask mask="(99) 99999-9999" {...register("phone")} placeholder='Insira seu número principal' className='rounded-full py-2 px-4 w-full text-title/80 focus:outline-none focus:ring focus:ring-purple-700 transition placeholder:text-title/50 placeholder:text-sm' type="text" id="phone" />
          </div>
          <div className="flex flex-col mt-3">
             <label htmlFor="phone">Mensagem</label>

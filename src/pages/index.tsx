@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = a
 ) => {
   const {data} = await api.get('/courses')
   const courses:CoursesDataTypes[] = data.courses
-  console.log(courses)
+
   return {
     props: {
       courses:courses

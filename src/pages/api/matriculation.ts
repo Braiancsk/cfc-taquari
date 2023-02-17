@@ -7,6 +7,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 type Data = {
   message?: string
   success?:any
+  data?:any
 }
 
 
@@ -22,16 +23,32 @@ export default async function handler(
  });
 
   if(req.method === 'POST'){
-    const matriculationPayload = req.body.data.customer.metadata
-    console.log(matriculationPayload)
+ 
+    const matriculationPayload = {
+    aluno:{ 
+    codigoCFC: "CHC00223",
+    codigoCurso: req.body.data.customer.metadata.codigoCurso,
+    nome: req.body.data.customer.metadata.nome,
+    email: req.body.data.customer.metadata.email,
+    cpf:req.body.data.customer.metadata.cpf,
+    telefone: req.body.data.customer.metadata.telefone,
+    nascimento:req.body.data.customer.metadata.nascimento,
+    cep:req.body.data.customer.metadata.cep,
+    endereco: req.body.data.customer.metadata.endereco,
+    numero: req.body.data.customer.metadata.numero,
+    complemento: req.body.data.customer.metadata.complemento,
+    bairro:req.body.data.customer.metadata.bairro,
+    cidade: req.body.data.customer.metadata.cidade
+  }}
+    console.log(req.body)
     try{
       const {data} = await axios.post('https://homologacao.unicfcead.com.br/api/cadastrar_aluno',matriculationPayload,{
         headers:{
-          Authorization:`Basic ${process.env.UNI_BASIC_AUTH}`
+          Authorization:`Basic ${btoa(process.env.UNI_BASIC_AUTH!)}`
         }
       })
       console.log(data)
-
+      return res.status(200).json({ data })
     }catch(error:any){
       console.log(error)
       return res.status(400).json({ message: error.response.data })

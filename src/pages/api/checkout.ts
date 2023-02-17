@@ -60,7 +60,6 @@ export default async function handler(
       payments:payments,
       ...req.body
     }
-    console.log(pagarmePayload)
 
      try{
      const {data} = await axios.post('https://api.pagar.me/core/v5/orders',pagarmePayload,{
@@ -68,7 +67,7 @@ export default async function handler(
         Authorization: 'Basic ' + Buffer.from(`${process.env.PAGARME_SK}:`).toString('base64'),           
       },
      })
-      console.log(data)
+
       return res.status(200).json({ data })
      }catch(error:any){
       console.error(JSON.stringify(error.response.data.errors))

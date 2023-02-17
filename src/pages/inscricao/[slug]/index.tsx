@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { HeaderLink } from "@/components/Header/HeaderLink/HeaderLink";
-import { FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
+import { CaretCircleLeft, FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
 import Image from "next/image";
 import { MobileHeader } from "@/components/MobileHeader/MobileHeader";
 import InputMask from 'react-input-mask';
@@ -17,6 +17,7 @@ import Link from "next/link";
 import { currencyFormater } from "@/utils/currencyFormater";
 import { isValidCPF } from "@/utils/validateCpf";
 import { ErrorMessage } from "@hookform/error-message";
+import { Footer } from "@/sections/Footer/Footer";
 
 interface FormData {
   nome: string;
@@ -119,7 +120,7 @@ export default function index({course}:ContextProps) {
         },
         birthday: convertDateToPagarme(getValues('nascimento')),
         metadata: {
-          codigoCFC: "1",
+          codigoCFC: "CHC00223",
           codigoCurso: course.codigoCurso,
           nome: getValues("nome"),
           email: getValues("email"),
@@ -170,6 +171,7 @@ export default function index({course}:ContextProps) {
   }
 
   return (
+    <>
     <main>
       <header className="bg-secondary min-h-[400px] flex flex-col justify-between">
       <div className="container flex items-center justify-between py-6">
@@ -222,6 +224,10 @@ export default function index({course}:ContextProps) {
             </div>
 
         <div className="container min-h-[130px]">
+          <button className="flex gap-1 items-center text-white font-semibold text-lg mb-4" onClick={() => router.push('/')}>
+          <CaretCircleLeft color="#fff" size={32} weight="fill" />
+            Voltar
+          </button>
           <h1 className="text-white text-3xl">Curso: {course.title}</h1>
         </div>
       </header>
@@ -480,5 +486,7 @@ export default function index({course}:ContextProps) {
         </div>
       </section>
     </main>
+    <Footer/>
+    </>
   );
 }
