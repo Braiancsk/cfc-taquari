@@ -107,6 +107,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
                   <a
                     href="https://www.facebook.com/"
                     target="_blank"
+                    rel="noreferrer"
                     className="flex items-center justify-center rounded-lg bg-white w-[30px] h-[30px]"
                   >
                     <FacebookLogo size={24} />
@@ -114,6 +115,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
                   <a
                     href="https://www.instagram.com/"
                     target="_blank"
+                    rel="noreferrer"
                     className="flex items-center justify-center rounded-lg bg-white w-[30px] h-[30px]"
                   >
                     <InstagramLogo size={24} />

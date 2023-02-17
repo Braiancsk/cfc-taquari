@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { HeaderLink } from "@/components/Header/HeaderLink/HeaderLink";
 import { CaretCircleLeft, FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
 import Image from "next/image";
-import { MobileHeader } from "@/components/MobileHeader/MobileHeader";
 import InputMask from 'react-input-mask';
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { api } from "@/services/api";
 import axios from "axios";
 import { removeMask } from "@/utils/removeMask";
-import { format, isValid } from "date-fns";
+import { isValid } from "date-fns";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { CoursesDataTypes } from "@/@types/CoursesDataTypes.types";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { currencyFormater } from "@/utils/currencyFormater";
 import { isValidCPF } from "@/utils/validateCpf";
@@ -209,6 +206,7 @@ export default function index({course}:ContextProps) {
                 <a
                   href="https://www.facebook.com/"
                   target="_blank"
+                  rel="noreferrer"
                   className="flex items-center justify-center rounded-lg bg-white w-[30px] h-[30px]"
                 >
                   <FacebookLogo size={24} />
@@ -216,6 +214,7 @@ export default function index({course}:ContextProps) {
                 <a
                   href="https://www.instagram.com/"
                   target="_blank"
+                  rel="noreferrer"
                   className="flex items-center justify-center rounded-lg bg-white w-[30px] h-[30px]"
                 >
                   <InstagramLogo size={24} />

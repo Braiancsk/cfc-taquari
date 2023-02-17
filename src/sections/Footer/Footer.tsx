@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export const Footer = () => {
@@ -12,10 +13,10 @@ export const Footer = () => {
             <div className='flex flex-col gap-1'>
             <strong className='font-semibold text-lg'>Mapa do site</strong>
             <ul>
-                <li><a className='text-lg' href="/#inicio">Início</a></li>
-                <li><a className='text-lg' href="/#sobre-nos">Sobre nós</a></li>
-                <li><a className='text-lg' href="/#cursos">Cursos</a></li>
-                <li><a className='text-lg' href="/#contato">Fale conosco</a></li>
+                <li><Link className='text-lg' href="/#inicio">Início</Link></li>
+                <li><Link className='text-lg' href="/#sobre-nos">Sobre nós</Link></li>
+                <li><Link className='text-lg' href="/#cursos">Cursos</Link></li>
+                <li><Link className='text-lg' href="/#contato">Fale conosco</Link></li>
             </ul>
             </div>
 

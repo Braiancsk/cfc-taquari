@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { mailOptions, transporter } from '@/services/nodemailer'
 import NextCors from 'nextjs-cors';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { courses } from '@/coursesData/coursesData';
