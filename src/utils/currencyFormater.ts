@@ -1,5 +1,5 @@
-export const currencyFormater = (amout: number) => {
+export const currencyFormater = (amount: number) => {
     return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(
-        amout,
+        amount,
     )
 }

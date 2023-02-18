@@ -22,7 +22,11 @@ export default async function handler(
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
  });
   if(req.method === 'GET'){
-    res.status(200).json({ courses: courses })
+    try{
+      return res.status(200).json({ courses: courses })
+    }catch(error:any){
+      return res.status(400).json({ message: 'Was not possible to resolve the request' })
+    }
   }
   
   return res.status(400).json({ message: 'The request method is invalid' })

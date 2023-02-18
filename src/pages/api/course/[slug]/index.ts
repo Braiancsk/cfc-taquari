@@ -23,7 +23,7 @@ export default async function handler(
   if(req.method === 'GET'){
     const {slug} = req.query
     const course = courses.find(course => course.slug === slug)
-    res.status(200).json({ data: course })
+   return res.status(200).json({ data: course })
   }
   
   return res.status(400).json({ message: 'The request method is invalid' })

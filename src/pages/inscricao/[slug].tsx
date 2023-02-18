@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { CaretCircleLeft, FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
 import Image from "next/image";
@@ -34,36 +34,6 @@ interface ContextProps {
   course:CoursesDataTypes
 }
 
-
-export const getStaticPaths: GetStaticPaths = async () => {
-
-  // Call an external API endpoint to get posts
-  const {data} = await api.get(`/courses`)
-  const courses:CoursesDataTypes[] = data.courses
-
-  // Get the paths we want to prerender based on posts
-  // In production environments, prerender all pages
-  // (slower builds, but faster initial page load)
-  const paths = courses.map((post) => ({
-    params: { slug: post.slug },
-  }))
-
-  // { fallback: false } means other routes should 404
-  return { paths, fallback: false }
-}
-
-export const getStaticProps: GetStaticProps<{ course: CoursesDataTypes }> = async ({params}:any) => {
-  const {slug} = params
-  const {data} = await api.get(`/course/${slug}`)
-  const course:CoursesDataTypes = data.data
-
-  return {
-    props: {
-      course:course ?? []
-    },
-  }
-}
-
 export default function Slug({course}:ContextProps) {
   const router = useRouter();
 
@@ -77,12 +47,9 @@ export default function Slug({course}:ContextProps) {
     clearErrors
   } = useForm<FormData>();
 
-  const [windowWidth, setWindowWidth] = useState<null | number>(null);
   const [isCpfValid, setIsCpfValid] = useState(false)
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+
 
   function convertDateToPagarme(date:string){
     const splitDate = date.split('/')
@@ -228,14 +195,14 @@ export default function Slug({course}:ContextProps) {
           <CaretCircleLeft color="#fff" size={32} weight="fill" />
             Voltar
           </button>
-          <h1 className="text-white text-3xl">Curso: {course.title}</h1>
+          <h1 className="text-white text-3xl">Curso: {course?.title}</h1>
         </div>
       </header>
 
       <section className="container grid lg:grid-cols-2 gap-5 mt-7">
         <div className="bg-white shadow-md rounded-lg p-4 h-max flex gap-3">
              <Image
-                src={course.image_url}
+                src={course?.image_url}
                 width={300}
                 height={600}
                 className="object-cover"
@@ -243,8 +210,8 @@ export default function Slug({course}:ContextProps) {
               />
 
           <div className="flex flex-col gap-3">
-          <strong className="text-title text-lg block">Curso: {course.title}</strong>
-          <strong className="text-title text-lg block">Valor: {currencyFormater(course.amount)}</strong>
+          <strong className="text-title text-lg block">Curso: {course?.title}</strong>
+          <strong className="text-title text-lg block">Valor: {currencyFormater(course?.amount)}</strong>
           </div>
         </div>
 
@@ -490,3 +457,35 @@ export default function Slug({course}:ContextProps) {
     </>
   );
 }
+
+
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  // Call an external API endpoint to get posts
+  // const {data} = await api.get(`/courses`)
+  // const courses:CoursesDataTypes[] = data.courses
+
+  // Get the paths we want to prerender based on posts
+  // In production environments, prerender all pages
+  // (slower builds, but faster initial page load)
+  // const paths = courses.map((post) => ({
+  //   params: { slug: post.slug },
+  // }))
+
+  // { fallback: false } means other routes should 404
+  return { paths:[], fallback: 'blocking' }
+}
+
+export const getStaticProps: GetStaticProps<{ course: CoursesDataTypes }> = async ({params}:any) => {
+
+  const {data} = await api.get(`/course/${params.slug}`)
+  const course:CoursesDataTypes = data.data
+
+  return {
+    props: {
+      course:course
+    },
+  }
+}
+

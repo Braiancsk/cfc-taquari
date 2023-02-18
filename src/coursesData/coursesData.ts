@@ -14,7 +14,7 @@ export const courses = [
             codigoCurso:2,
             code:"2",
             amount:220,
-            image_url:"/ATUALIZAÇÃO ESCOLAR.png",
+            image_url:"/ATUALIZAÇÃO_ESCOLAR.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE COLETIVO DE PASSAGEIROS",
@@ -22,7 +22,7 @@ export const courses = [
             codigoCurso:3,
             code:"3",
             amount:220,
-            image_url:"/ATUALIZAÇÃO COLETIVO.png",
+            image_url:"/ATUALIZAÇÃO_COLETIVO.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE CARGAS DE PRODUTOS PERIGOSOS",
@@ -30,7 +30,7 @@ export const courses = [
             codigoCurso:4,
             code:"4",
             amount:220,
-            image_url:"/ATUALIZAÇÃO MOPP.png",
+            image_url:"/ATUALIZAÇÃO_MOPP.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE EMERGÊNCIA",
@@ -38,7 +38,7 @@ export const courses = [
             codigoCurso:5,
             code:"5",
             amount:220,
-            image_url:"/ATUALIZAÇÃO TRANSPORTE DE EMERGENCIA.png",
+            image_url:"/ATUALIZAÇÃO_TRANSPORTE_DE_EMERGENCIA.png",
         },
         {
             title:"ATUALIZAÇÃO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE CARGAS INDIVISÍVEIS",
@@ -46,7 +46,7 @@ export const courses = [
             codigoCurso:6,
             code:"6",
             amount:220,
-            image_url:"/Atualização Indivisíveis.png",
+            image_url:"/Atualização_Indivisíveis.png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE DE CARGA INDIVISÍVEL E OUTRAS",
@@ -62,7 +62,7 @@ export const courses = [
             codigoCurso:8,
             code:"8",
             amount:490,
-            image_url:"/CARGAS PERIGOSAS (MOPP).png",
+            image_url:"/CARGAS_PERIGOSAS_(MOPP).png",
         },
         {
             title:"CURSO PARA CONDUTORES DE VEÍCULO DE TRANSPORTE COLETIVO",

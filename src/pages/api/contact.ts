@@ -54,10 +54,10 @@ export default async function handler(
         ...generateEmailContent(data),
         subject:'Mensagem do site do CFC Taquari',
       })
-      res.status(200).json({success: true})
+     return res.status(200).json({success: true})
     }catch(err:any){
       console.log(err)
-      res.status(400).json({ message: err.message })
+     return res.status(400).json({ message: err.message })
     }
   }
   return res.status(400).json({ message: 'Não foi possível enviar o formulário' })

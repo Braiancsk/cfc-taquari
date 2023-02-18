@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Header } from '@/components/Header/Header'
 import { Courses } from '@/sections/Courses/Courses'
 import { About } from '@/sections/About/About'
@@ -9,19 +8,19 @@ import { Footer } from '@/sections/Footer/Footer'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
 import { api } from '@/services/api'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import { CoursesDataTypes } from '@/@types/CoursesDataTypes.types'
 
-
 export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = async (
-  context
+  
 ) => {
   const {data} = await api.get('/courses')
   const courses:CoursesDataTypes[] = data.courses
 
   return {
     props: {
-      courses:courses
+      courses:courses,
+      
     },
   }
 }
