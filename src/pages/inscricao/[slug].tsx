@@ -15,6 +15,7 @@ import { currencyFormater } from "@/utils/currencyFormater";
 import { isValidCPF } from "@/utils/validateCpf";
 import { ErrorMessage } from "@hookform/error-message";
 import { Footer } from "@/sections/Footer/Footer";
+import Swal from 'sweetalert2'
 
 interface FormData {
   nome: string;
@@ -98,17 +99,25 @@ export default function Slug({course}:ContextProps) {
           complemento: getValues("complemento"),
           bairro: getValues("bairro"),
           cidade: getValues("cidade"),
+          course_name:course.title,
         },
       },
     };
 
     if(errors.cpf || errors.nascimento || errors.telefone || errors.cep) return
     try {
-      const { data } = await api.post("/checkout", pagarmePayload);
+      const { data } = await api.post("/api/checkout", pagarmePayload);
       console.log(data);
       window.location.href = data.data.checkouts[0].payment_url
     } catch (error: any) {
       console.error(error);
+      Swal.fire({
+        title:'Ocorreu um erro ao enviar o formulário',
+        text:  error.response.message,
+        icon: 'error',
+        confirmButtonColor:"#ffb804",
+        confirmButtonText: 'Tentar novamente'
+      })
     }
   }
 
@@ -199,7 +208,7 @@ export default function Slug({course}:ContextProps) {
         </div>
       </header>
 
-      <section className="container grid lg:grid-cols-2 gap-5 mt-7">
+      <section className="container grid xl:grid-cols-2 gap-5 mt-7">
         <div className="bg-white shadow-md rounded-lg p-4 h-max flex gap-3">
              <Image
                 src={course?.image_url}

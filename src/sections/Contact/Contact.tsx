@@ -27,6 +27,7 @@ export const Contact = React.forwardRef((props,ref:any) => {
             title:'Formulário enviado com sucesso',
             text:  'Seu email foi enviado. Iremos entrar em contato em breve',
             icon: 'success',
+            confirmButtonColor:"#ffb804",
             confirmButtonText: 'Tentar novamente'
           })
       }catch(error:any){
@@ -35,6 +36,7 @@ export const Contact = React.forwardRef((props,ref:any) => {
             title:'Ocorreu um erro ao enviar o formulário',
             text:  error.response.message,
             icon: 'error',
+            confirmButtonColor:"#ffb804",
             confirmButtonText: 'Tentar novamente'
           })
       }

@@ -2,13 +2,13 @@ import axios from 'axios';
 import NextCors from 'nextjs-cors';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { format } from 'date-fns';
+import { courses } from '@/coursesData/coursesData';
 
 type Data = {
   message?: string
   success?:any
   data?:any
 }
-
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,15 +22,16 @@ export default async function handler(
  });
 
  if(req.method === 'POST'){
-  const date = new Date();
-  const boletoDueAt = format(new Date(date.setDate(date.getDate() + 3 /*days*/)), 'MM/dd/yyyy') 
 
+   const date = new Date();
+   const boletoDueAt = format(new Date(date.setDate(date.getDate() + 3 /*days*/)), 'MM/dd/yyyy') 
+   const course = courses.find(course => course.codigoCurso === req.body.customer.metadata.codigoCurso)
     const items =  [
       {
-        code:'1',
-        amount: 100*297, //100 = R$1,00 * quantos reais você deseja
+        code:course?.codigoCurso+'',
+        amount: 100*course?.amount!, //100 = R$1,00 * quantos reais você deseja
         quantity:1,
-        description:'Item de teste'
+        description:course?.title
       }
     ]
 
@@ -42,7 +43,7 @@ export default async function handler(
           billing_address_editable: false,
           customer_editable: true,
           accepted_payment_methods: ["credit_card", "boleto", "pix"],
-          success_url: "http://localhost:3000/obrigado",
+          success_url: "https://cfc-taquari.vercel.app/obrigado",
           boleto:{
             instructions:'Vencimento do boleto acontece em 3 dias. Pague o quanto antes para que possamos confirmar sua matrícula',
             due_at:boletoDueAt,
