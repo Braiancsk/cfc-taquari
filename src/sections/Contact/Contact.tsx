@@ -21,7 +21,7 @@ export const Contact = React.forwardRef((props,ref:any) => {
     async function sendEmail(payload:FormData){
       console.log(payload)
       try{
-         const {data} = await api.post('/contact',payload)
+         const {data} = await api.post('/api/contact',payload)
          console.log(data)
          Swal.fire({
             title:'Formulário enviado com sucesso',
