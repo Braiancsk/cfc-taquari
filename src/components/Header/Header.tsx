@@ -78,7 +78,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
         <>
           <div className="container flex items-center justify-between py-6">
                 <Image
-                  src="/LOGO.png"
+                  src="/logo.png"
                   width={194}
                   height={41}
                   alt="Logo da empresa CFC Taquari"
