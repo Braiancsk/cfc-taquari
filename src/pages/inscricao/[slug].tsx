@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Head from 'next/head'
 import { useRouter } from "next/router";
 import { CaretCircleLeft, FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
 import Image from "next/image";
@@ -107,7 +108,7 @@ export default function Slug({course}:ContextProps) {
     if(errors.cpf || errors.nascimento || errors.telefone || errors.cep) return
     try {
       const { data } = await api.post("/api/checkout", pagarmePayload);
-      console.log(data);
+
       window.location.href = data.data.checkouts[0].payment_url
     } catch (error: any) {
       console.error(error);
@@ -146,6 +147,12 @@ export default function Slug({course}:ContextProps) {
 
   return (
     <>
+      <Head>
+        <title>CFC Taquari - {course?.title}</title>
+        <meta name="description" content="No Centro de Formação de Condutores Taquari você possui alto grau de qualidade para fazer sua habilitação." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
     <main>
       <header className="bg-secondary min-h-[400px] flex flex-col justify-between">
       <div className="container flex items-center justify-between py-6">
@@ -208,7 +215,7 @@ export default function Slug({course}:ContextProps) {
         </div>
       </header>
 
-      <section className="container grid xl:grid-cols-2 gap-5 mt-7">
+      <section className="container grid xl:grid-cols-2 gap-5 my-10">
         <div className="bg-white shadow-md rounded-lg p-4 h-max flex gap-3">
              <Image
                 src={course?.image_url}
