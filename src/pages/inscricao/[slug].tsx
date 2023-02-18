@@ -143,7 +143,7 @@ export default function Slug({course}:ContextProps) {
 
               <Link href="/">
               <Image
-                src="/LOGO.png"
+                src="/logo.png"
                 width={194}
                 height={41}
                 alt="Logo da empresa CFC Taquari"
@@ -191,7 +191,7 @@ export default function Slug({course}:ContextProps) {
             </div>
 
         <div className="container min-h-[130px]">
-          <button className="flex gap-1 items-center text-white font-semibold text-lg mb-4" onClick={() => router.push('/')}>
+          <button className="flex gap-1 items-center text-white font-semibold text-lg mb-4" onClick={() => router.push('/#cursos')}>
           <CaretCircleLeft color="#fff" size={32} weight="fill" />
             Voltar
           </button>
