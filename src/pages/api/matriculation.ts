@@ -47,7 +47,7 @@ export default async function handler(
           Authorization:`Basic ${btoa(process.env.UNI_BASIC_AUTH!)}`
         }
       })
-      console.log(data)
+      console.log({respostaDoEAD:data})
       return res.status(200).json({ data })
     }catch(error:any){
       console.log(error)
