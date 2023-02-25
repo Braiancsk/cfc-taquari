@@ -41,6 +41,17 @@ interface PostsDocumentData {
      *
      */
     conteudo: prismicT.RichTextField;
+    /**
+     * descricaoPrevia field in *posts*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: posts.descricaoprevia
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    descricaoprevia: prismicT.KeyTextField;
 }
 /**
  * posts document from Prismic
