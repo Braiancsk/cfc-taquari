@@ -5,6 +5,10 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import Link from 'next/link'
+import { PrismicProvider } from '@prismicio/react'
+import { PrismicPreview } from '@prismicio/next'
+import { repositoryName } from "../../prismicio"
 
 const inter = Inter({ subsets: ['latin'] })
 // Create a client
@@ -18,7 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
-    <Component {...pageProps} />
+        <PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>
+          <PrismicPreview repositoryName={repositoryName}>
+            <Component {...pageProps} />
+          </PrismicPreview>
+        </PrismicProvider>
     </QueryClientProvider>
   )
 }
