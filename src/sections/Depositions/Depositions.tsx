@@ -72,7 +72,7 @@ export const Depositions = forwardRef((props,ref:any) => {
         <div className="relative flex-1 w-full h-full navigation-wrapper">
           <div className="lg:absolute left-0 lg:top-[-140px] mr-auto lg:ml-auto">
             <div ref={sliderRef} className="keen-slider">
-            {depositionsItems.map((item, index) => (
+              {depositionsItems.map((item, index) => (
               <div key={index} className="keen-slider__slide rounded-lg bg-[#720285] text-white p-[20px]">
                 <Quotes size={50} weight="fill" />
                 <p className="font-medium text-sm">

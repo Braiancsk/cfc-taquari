@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import React from 'react'
 
-export const About = React.forwardRef((props,ref:any) => {
+export const About = React.forwardRef((props, ref: any) => {
   return (
     <section ref={ref} id="sobre-nos">
-        <h2 className='text-4xl font-semibold text-secondary text-center'>Sobre nós</h2>
+      <h2 className='text-4xl font-semibold text-secondary text-center'>Sobre o CFC:</h2>
 
-        <div className="grid lg:grid-cols-2 gap-5 container mt-[67px]">
-            <div>
-                <Image src="/about-img.jpg" width={750} height={254} alt="Imagem do time do CFC Taquari"/>
-            </div>
-            <p className='text-[#1B1B1B]/80 font-medium'>
+      <div className="grid lg:grid-cols-2 gap-5 container mt-[67px]">
+        <div>
+          <Image src="/about-img.jpg" width={750} height={254} alt="Imagem do time do CFC Taquari" />
+        </div>
+        <p className='text-[#1B1B1B]/80 font-medium'>
           O CFC TAQUARI é um estabelecimento educacional cuja principal função é oferecer cursos de formação de condutores de veículos automotores.             <br />
           <br />
           <br />
@@ -38,7 +38,7 @@ export const About = React.forwardRef((props,ref:any) => {
           <br />
           <strong>Venha nos conhecer!</strong>
           </p>
-        </div>
+          </div>
     </section>
   )
 })
