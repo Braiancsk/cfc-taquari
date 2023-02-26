@@ -41,7 +41,7 @@ const variants = {
 
 export const Navigation = ({toggle,isOpen}:NavigationProps) => {
   return (
-    <motion.ul className={`p-[25px] absolute top-[100px] right-0 w-full ${isOpen ? '' : 'pointer-events-none'}`} variants={variants}>
+    <motion.ul className={`p-[25px] absolute top-[100px] right-0 w-full`} variants={variants}>
     {links.map(i => (
       <MenuItem onClick={() => toggle()} link={i.id} text={i.text} key={i.id} />
     ))}

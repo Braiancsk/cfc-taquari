@@ -43,13 +43,13 @@ const sidebar = {
     <>
     {
         isOpen && (
-            <motion.div variants={sidebar} animate={isOpen ? "open" : "closed"} onClick={() => toggleOpen()} className="bg-black/50 w-full min-h-screen fixed inset-0 z-10"></motion.div>
+            <motion.div variants={sidebar} animate={isOpen ? "open" : "closed"} onClick={() => toggleOpen()} className={`bg-black/50 w-full min-h-screen fixed inset-0 z-10`}></motion.div>
         )
     }
 
     <motion.nav
     style={{top:top}}
-      className={`w-[300px] fixed-navbar absolute right-0 bottom-0 z-20 ${!isOpen ? 'pointer-events-none' : ''}`}
+      className={`w-[300px] fixed-navbar absolute right-0 bottom-0 ${isOpen ? '' : 'pointer-events-none'} z-20`}
       initial={false}
       animate={isOpen ? "open" : "closed"}
       custom={height}
