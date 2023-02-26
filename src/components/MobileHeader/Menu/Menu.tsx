@@ -49,7 +49,7 @@ const sidebar = {
 
     <motion.nav
     style={{top:top}}
-      className="w-[300px] fixed-navbar absolute right-0 bottom-0 z-20"
+      className={`w-[300px] fixed-navbar absolute right-0 bottom-0 z-20 ${!isOpen ? 'pointer-events-none' : ''}`}
       initial={false}
       animate={isOpen ? "open" : "closed"}
       custom={height}

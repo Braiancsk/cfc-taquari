@@ -206,17 +206,17 @@ export default function Slug({course}:ContextProps) {
               </div>
             </div>
 
-        <div className="container min-h-[130px]">
+        <div className="container min-h-[130px] py-5">
           <button className="flex gap-1 items-center text-white font-semibold text-lg mb-4" onClick={() => router.push('/#cursos')}>
           <CaretCircleLeft color="#fff" size={32} weight="fill" />
             Voltar
           </button>
-          <h1 className="text-white text-3xl">Curso: {course?.title}</h1>
+          <h1 className="text-white text-2xl lg:text-3xl">Curso: {course?.title}</h1>
         </div>
       </header>
 
       <section className="container grid xl:grid-cols-2 gap-5 my-10">
-        <div className="bg-white shadow-md rounded-lg p-4 h-max flex gap-3">
+        <div className="bg-white shadow-md rounded-lg p-4 h-max flex md:flex-row flex-col gap-3">
              <Image
                 src={course?.image_url}
                 width={300}
