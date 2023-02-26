@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async ({previewData}) => {
     }
 }
 
-const index = ({posts}:any) => {
+const Index = ({posts}:any) => {
     const [windowWidth, setWindowWidth] = useState<null | number>(null);
 
     useEffect(() => {
@@ -69,6 +69,7 @@ const index = ({posts}:any) => {
         <section className='my-10 container gap-7 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1'>
             {posts.filter((post:any) => post.uid !== posts[0].uid).map((post:any) => (
                 <PostCard
+                key={post.uid}
                 image={post.data.imagem.url}
                 alt={post.data.imagem.alt}
                 title={post.data.titulo}
@@ -84,4 +85,4 @@ const index = ({posts}:any) => {
   )
 }
 
-export default index
+export default Index

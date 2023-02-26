@@ -11,7 +11,7 @@ import { AsidePost } from '@/components/AsidePost/AsidePost'
 import { MobileHeader } from '@/components/MobileHeader/MobileHeader'
 
 
-const index = ({post,lastPosts}:any) => {
+const Index = ({post,lastPosts}:any) => {
   const router = useRouter()
   const [windowWidth, setWindowWidth] = useState<null | number>(null);
 
@@ -68,6 +68,7 @@ const index = ({post,lastPosts}:any) => {
           <strong className='text-title text-sm block mb-5'>{lastPosts.lenght > 0 ? 'Últimas postagens' : 'Nenhuma outra postagem recente'}</strong>
           {lastPosts.map((post:any) => (
                 <AsidePost
+                key={post.uid}
                 image={post.data.imagem.url}
                 alt={post.data.imagem.alt}
                 title={post.data.titulo}
@@ -87,7 +88,7 @@ const index = ({post,lastPosts}:any) => {
   )
 }
 
-export default index
+export default Index
 
 export const getStaticPaths: GetStaticPaths = async () => {
     // const client = createClient()

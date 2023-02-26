@@ -11,6 +11,7 @@ export const Blog = React.forwardRef(({posts}:any,ref:any) => {
         <section className='my-5 container gap-7 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1'>
             {posts?.map((post:any) => (
                 <PostCard
+                key={post.uid}
                 image={post.data.imagem.url}
                 alt={post.data.imagem.alt}
                 title={post.data.titulo}
