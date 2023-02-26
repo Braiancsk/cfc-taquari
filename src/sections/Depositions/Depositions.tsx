@@ -2,7 +2,6 @@ import { useState,forwardRef } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { ArrowCircleLeft, ArrowCircleRight, Quotes } from "phosphor-react";
-import Image from "next/image";
 
 const depositionsItems = [
   {
@@ -38,11 +37,10 @@ export const Depositions = forwardRef((props,ref:any) => {
 
   const [sliderRef,instanceRef] = useKeenSlider({
     mode: "snap",
-    
     slides: {
       origin: "center",
       perView: 1,
-      spacing: 10,
+      spacing: 60,
     },
     initial: 0,
     slideChanged(slider) {
@@ -51,13 +49,14 @@ export const Depositions = forwardRef((props,ref:any) => {
     created() {
       setLoaded(true);
     },
+    
   });
 
   return (
     <section
     ref={ref}
       id="depoimentos"
-      className="pt-[91px] pb-[156px] bg-secondary/20 w-full overflow-hidden my-[67px] h-[600px] lg:h-full"
+      className="pt-[91px] pb-[156px] bg-secondary/20 w-full overflow-hidden my-[67px] h-max lg:h-full"
     >
       <div className="flex flex-col lg:flex-row gap-8 items-center container">
         <div className="w-full lg:ml-auto flex-1">
