@@ -155,7 +155,7 @@ export default function Slug({course}:ContextProps) {
       </Head>
     <main>
       <header className="bg-secondary min-h-[400px] flex flex-col justify-between">
-      <div className="container flex items-center justify-between py-6">
+      <div className="container flex gap-5 md:flex-row flex-col md:items-center justify-between py-6">
 
               <Link href="/">
               <Image
