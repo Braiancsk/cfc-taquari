@@ -10,6 +10,7 @@ interface FixedNavProps {
   aboutActive:boolean
   depositionsActive:boolean
   contactActive:boolean
+  blogActive:boolean
 }
 const MotionFixedNavDesktop = React.forwardRef((props:FixedNavProps, ref: any) => {
   return (
@@ -40,6 +41,9 @@ const MotionFixedNavDesktop = React.forwardRef((props:FixedNavProps, ref: any) =
           </li>
           <li>
             <HeaderLink text="FALE CONOSCO" link="#contato" active={props.contactActive} />
+          </li>
+          <li>
+            <HeaderLink text="BLOG" link="/blog" active={props.blogActive} />
           </li>
         </ul>
       </div>

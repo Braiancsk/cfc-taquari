@@ -31,7 +31,8 @@ const richTextComponents = {
       {children}
     </Heading>
   ),
-  paragraph: ({ children }:any) => <p className="mb-7 last:mb-0">{children}</p>,
+  paragraph: ({ children }:any) => <p className="mb-4 last:mb-0 text-title">{children}</p>,
+  PrismicNextImage: ({ children }:any) => <div className="my-4 max-w-[200px]">{children}</div>,
   oList: ({ children }:any) => (
     <ol className="mb-7 pl-4 last:mb-0 md:pl-6">{children}</ol>
   ),

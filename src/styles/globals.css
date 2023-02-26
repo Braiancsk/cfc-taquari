@@ -22,6 +22,12 @@ body{
     background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(0,0,0,0.0) 100%); 
 }
 
+@media screen and (max-width: 1024px) {
+    .post-card-shadow::after{
+        bottom: -100px;
+    }
+}
+
 .fixed-navbar{
     min-height: calc(100vh + 10px);
 }

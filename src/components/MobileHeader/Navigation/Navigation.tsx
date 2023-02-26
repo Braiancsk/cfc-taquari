@@ -5,24 +5,28 @@ import { NavigationProps } from './NavigationProps.types';
 
 const links = [
     {
-        id:'inicio',
+        id:'/#inicio',
         text:'Início'
     },
     {
-        id:'cursos',
+        id:'/#cursos',
         text:'Cursos'
     },
     {
-        id:'sobre-nos',
+        id:'/#sobre-nos',
         text:'Sobre nós'
     },
     {
-        id:'depoimentos',
+        id:'/#depoimentos',
         text:'Depoimentos'
     },
     {
-        id:'contato',
+        id:'/#contato',
         text:'Fale conosco'
+    },
+    {
+        id:'/blog',
+        text:'Blog'
     },
 ]
 

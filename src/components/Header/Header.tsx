@@ -47,7 +47,7 @@ const cards = [
   },
 ];
 
-export const Header = ({coursesActive,aboutActive,depositionsActive,contactActive}:HeaderActive) => {
+export const Header = ({coursesActive,aboutActive,depositionsActive,contactActive,blogActive}:HeaderActive) => {
   const [windowWidth, setWindowWidth] = useState<null | number>(null);
 
   useEffect(() => {
@@ -129,6 +129,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
               <HeaderLink active={aboutActive} text="SOBRE NÓS" link="#sobre-nos"/>
               <HeaderLink active={depositionsActive} text="DEPOIMENTOS" link="#depoimentos"/>
               <HeaderLink active={contactActive} text="CONTATO" link="#contato"/>
+              <HeaderLink active={blogActive} text="BLOG" link="/blog"/>
               </nav>
           {!isHeaderInView &&  <FixedNavDesktop initial={{opacity:0, y:-100}} 
                 homeActive={isHeaderInView}
@@ -136,6 +137,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
                 aboutActive={aboutActive}
                 depositionsActive={depositionsActive}
                 contactActive={contactActive}
+                blogActive={blogActive}
                 transition={{type:'spring'}} 
                 animate={{opacity:1,y:0}} 
                 exit={{opacity:0, y:-100}}/> }

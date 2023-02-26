@@ -4,6 +4,34 @@ import "keen-slider/keen-slider.min.css";
 import { ArrowCircleLeft, ArrowCircleRight, Quotes } from "phosphor-react";
 import Image from "next/image";
 
+const depositionsItems = [
+  {
+    name:'Tatiane Vilmar Bizarro  recomenda CFC Taquari.',
+    data:'26 de novembro de 2021',
+    deposition:'Sim!!Recomendo 👏👏👏São Atenciosas e Nos Tratam Muito Bem🥰👏Os Instrutores São Nota 1000 👏👏👏'
+  },
+  {
+    name:'Andrielly Menger  recomenda CFC Taquari.',
+    data:'25 de setembro de 2020',
+    deposition:'Ótimos instrutores e equipe muito simpática e prestativa!'
+  },
+  {
+    name:'Carlos Y Camila  recomenda CFC Taquari.',
+    data:'23 de setembro de 2020',
+    deposition:'Uma boa escola para quem procura se habilitar! Professores e instrutores nota 100 !'
+  },
+  {
+    name:'Verinha Silveira  recomenda CFC Taquari.',
+    data:'4 de janeiro de 2020',
+    deposition:'otimos profissionais, otimos instrutores , nota 10. parabéns!!'
+  },
+  {
+    name:'Sirlei DA Silva  recomenda CFC Taquari.',
+    data:'27 de outubro de 2019',
+    deposition:'Gente o meu muito obrigada a vcs do CFC DE TAQUARI pelo carinho a seriedade com quem vcs lidam todos os dias. Sempre me sinti bem aí e sempre resolveram meus problemas quando precisava. Obrigada ao Felipe, Marquinhos e ao Maicon que acreditaram e me apoiavam sempre vcs vão ficar no meu coração. As meninas da recepção eu não sei o nome delas, mas são uma queridas. E a professora de aula teórica muito querida por todos e pura simpatia. Obrigada de coração agora e só cair a ficha que ainda não caiu quando me dou por conta dou risada de felicidade.'
+  },
+]
+
 export const Depositions = forwardRef((props,ref:any) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -44,25 +72,16 @@ export const Depositions = forwardRef((props,ref:any) => {
         <div className="relative flex-1 w-full h-full navigation-wrapper">
           <div className="lg:absolute left-0 lg:top-[-140px] mr-auto lg:ml-auto">
             <div ref={sliderRef} className="keen-slider">
-              {[0,1,2,3].map((item, index) => (
+            {depositionsItems.map((item, index) => (
               <div key={index} className="keen-slider__slide rounded-lg bg-[#720285] text-white p-[20px]">
                 <Quotes size={50} weight="fill" />
                 <p className="font-medium text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Praesent dui risus, cursus a semper a, imperdiet nec nisl. Nam
-                  tincidunt imperdiet eros, eu semper arcu congue luctus.
+                  {item.deposition}
                 </p>
                 <div className="flex gap-2 item-center mt-[21px]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                    alt="Aluno depoimento"
-                    width={50}
-                    height={50}
-                    className="rounded-full h-[50px] w-[50px] object-cover"
-                  />
                   <div className="flex flex-col gap-1">
-                    <strong className="font-medium">Jane Doe</strong>
-                    <p className="text-xs">CFC Taquari</p>
+                    <strong className="font-medium">{item.name}</strong>
+                    <p className="text-xs">{item.data}</p>
                   </div>
                 </div>
               </div>

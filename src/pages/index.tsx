@@ -10,23 +10,29 @@ import { useInView } from 'framer-motion'
 import { api } from '@/services/api'
 import { GetStaticProps } from 'next'
 import { CoursesDataTypes } from '@/@types/CoursesDataTypes.types'
+import { Blog } from '@/sections/Blog/Blog'
+import { createClient } from 'prismicio'
+
 
 export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = async (
-  
+  {previewData}
 ) => {
   const {data} = await api.get('/courses')
   const courses:CoursesDataTypes[] = data.courses
+  const client = createClient({ previewData })
+
+  const posts = await client.getAllByType('posts')
 
   return {
     props: {
       courses:courses,
-      
+      posts:posts.slice(0,2)
     },
   }
 }
 
 
-export default function Home({courses}:any) {
+export default function Home({courses,posts}:any) {
 
   const coursesRef = useRef<any>(null);
   const isCoursesInView = useInView(coursesRef,{amount:0.3});
@@ -39,6 +45,9 @@ export default function Home({courses}:any) {
 
   const contactRef = useRef<any>(null);
   const isContactInView = useInView(contactRef,{amount:0.8});
+
+  const blogRef = useRef<any>(null);
+  const isBlogInView = useInView(blogRef,{amount:0.8});
 
 
   return (
@@ -55,6 +64,7 @@ export default function Home({courses}:any) {
       aboutActive={isAboutInView}
       depositionsActive={isDepositionsInView}
       contactActive={isContactInView}
+      blogActive={isBlogInView}
       />
 
         <Courses ref={coursesRef} courses={courses}/>
@@ -64,6 +74,8 @@ export default function Home({courses}:any) {
         <Depositions ref={depositionsRef}/>
 
         <Contact ref={contactRef}/>
+
+        <Blog ref={blogRef} posts={posts}/>
 
         <Footer/>
       </main>

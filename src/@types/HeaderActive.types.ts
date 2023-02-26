@@ -3,4 +3,5 @@ export type HeaderActive = {
     aboutActive:boolean
     depositionsActive:boolean
     contactActive:boolean
+    blogActive:boolean
 }
