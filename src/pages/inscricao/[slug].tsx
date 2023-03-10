@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from 'next/head'
 import { useRouter } from "next/router";
-import { CaretCircleLeft, FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
+import { CaretCircleLeft, CircleNotch, FacebookLogo, InstagramLogo, Phone } from "phosphor-react";
 import Image from "next/image";
 import InputMask from 'react-input-mask';
 import { useForm } from "react-hook-form";
@@ -42,11 +42,11 @@ export default function Slug({course}:ContextProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,isSubmitting },
     getValues,
     setValue,
     setError,
-    clearErrors
+    clearErrors,
   } = useForm<FormData>();
 
   const [isCpfValid, setIsCpfValid] = useState(false)
@@ -68,8 +68,7 @@ export default function Slug({course}:ContextProps) {
     return `${yy}-${mm}-${dd}` 
   }
 
-
-  async function createCheckout() {
+  async function createCheckout(matriculation_id:number) {
 
     const pagarmePayload = {
       customer: {
@@ -101,6 +100,7 @@ export default function Slug({course}:ContextProps) {
           bairro: getValues("bairro"),
           cidade: getValues("cidade"),
           course_name:course.title,
+          matriculation_id
         },
       },
     };
@@ -115,6 +115,46 @@ export default function Slug({course}:ContextProps) {
       Swal.fire({
         title:'Ocorreu um erro ao enviar o formulário',
         text:  error.response.message,
+        icon: 'error',
+        confirmButtonColor:"#ffb804",
+        confirmButtonText: 'Tentar novamente'
+      })
+    }
+  }
+
+  async function createPreMatriculation(){
+    try{
+      const {data} = await api.post('/api/pre-matriculation',{
+        codigoCFC: "CHC00223",
+        codigoCurso: course.codigoCurso,
+        nome: getValues("nome"),
+        email: getValues("email"),
+        cpf: getValues("cpf"),
+        telefone: getValues("telefone"),
+        nascimento: convertDateToUnicfc(getValues("nascimento")),
+        cep: getValues("cep"),
+        endereco: getValues("endereco"),
+        numero: getValues("numero"),
+        complemento: getValues("complemento"),
+        bairro: getValues("bairro"),
+        cidade: getValues("cidade"),
+      })
+      if(data.data.code === "200"){
+       return createCheckout(data.data.matricula.id)
+      }
+      Swal.fire({
+        title:data.message,
+        text: 'Por favor, confira seus dados e tente novamente.',
+        icon: 'error',
+        confirmButtonColor:"#ffb804",
+        confirmButtonText: 'Tentar novamente'
+      })
+      console.log(data)
+    }catch(err:any){
+      console.error(err)
+      Swal.fire({
+        title:err.response.data.message.message,
+        text: 'Por favor, confira seus dados e tente novamente.',
         icon: 'error',
         confirmButtonColor:"#ffb804",
         confirmButtonText: 'Tentar novamente'
@@ -241,7 +281,7 @@ export default function Slug({course}:ContextProps) {
         </p>
 
         <form
-          onSubmit={handleSubmit(createCheckout)}
+          onSubmit={handleSubmit(createPreMatriculation)}
           className="flex flex-col gap-5 my-7 max-w-[800px]"
         >
           <div className="grid md:grid-cols-2 items-center gap-3">
@@ -324,7 +364,7 @@ export default function Slug({course}:ContextProps) {
           <div className="grid md:grid-cols-2 items-center gap-3">
           <div className="flex flex-1 flex-col gap-1">
               <label htmlFor="nascimento" className="text-title-/80 text-sm">
-                Data Nasci
+                Data Nascimento
               </label>
               <InputMask
                 mask="99/99/9999"
@@ -461,9 +501,13 @@ export default function Slug({course}:ContextProps) {
 
           <button
             type="submit"
-            className="bg-primary p-2 max-w-[300px] w-full rounded-lg text-center text-white font-semibold text-lg ml-auto"
+            disabled={isSubmitting}
+            className="bg-primary disabled:opacity-75 flex justify-center items-center p-2 max-w-[300px] w-full rounded-lg text-center text-white font-semibold text-lg ml-auto"
           >
-            Adquirir curso
+            {isSubmitting ? (
+              <CircleNotch size={32} className="animate-spin"/>
+            ) : 'Adquirir curso'}
+            
           </button>
         </form>
         </div>
