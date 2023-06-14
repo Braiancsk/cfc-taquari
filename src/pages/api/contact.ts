@@ -52,7 +52,7 @@ export default async function handler(
       await transporter.sendMail({
         ...mailOptions,
         ...generateEmailContent(data),
-        subject:'Mensagem do site do CFC Taquari',
+        subject:'Nova mensagem do site do CFC Taquari',
       })
      return res.status(200).json({success: true})
     }catch(err:any){

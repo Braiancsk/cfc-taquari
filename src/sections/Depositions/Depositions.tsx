@@ -5,30 +5,41 @@ import { ArrowCircleLeft, ArrowCircleRight, Quotes } from "phosphor-react";
 
 const depositionsItems = [
   {
-    name:'Tatiane Vilmar Bizarro  recomenda CFC Taquari.',
+    name:'Thalma Silveira recomenda CFC Taquari.',
+    data:'13 de Junho de 2023',
+    deposition:'Atendimento perfeito e o carinho das gurias é o melhor!!♥️'
+  },
+  {
+    name:'Maxsuel Brandão Vargas recomenda CFC Taquari.',
+    data:'13 de Junho de 2023',
+    deposition:'Gostei muito da recepção e de todas as aulas até então'
+  },
+  {
+    name:'Queila Santos',
+    data:'12 de Junho de 2023',
+    deposition:'Muito proficionalismo,professora super atenciosa e empenhada a ensinar os alunos. Que continuem com esse atendimento de excelência. Parabéns!'
+  },
+  {
+    name:'Tatiane Vilmar Bizarro recomenda CFC Taquari.',
     data:'26 de novembro de 2021',
     deposition:'Sim!!Recomendo 👏👏👏São Atenciosas e Nos Tratam Muito Bem🥰👏Os Instrutores São Nota 1000 👏👏👏'
   },
   {
-    name:'Andrielly Menger  recomenda CFC Taquari.',
+    name:'Andrielly Menger recomenda CFC Taquari.',
     data:'25 de setembro de 2020',
     deposition:'Ótimos instrutores e equipe muito simpática e prestativa!'
   },
   {
-    name:'Carlos Y Camila  recomenda CFC Taquari.',
+    name:'Carlos Y Camila recomenda CFC Taquari.',
     data:'23 de setembro de 2020',
     deposition:'Uma boa escola para quem procura se habilitar! Professores e instrutores nota 100 !'
   },
   {
-    name:'Verinha Silveira  recomenda CFC Taquari.',
+    name:'Verinha Silveira recomenda CFC Taquari.',
     data:'4 de janeiro de 2020',
     deposition:'otimos profissionais, otimos instrutores , nota 10. parabéns!!'
   },
-  {
-    name:'Sirlei DA Silva  recomenda CFC Taquari.',
-    data:'27 de outubro de 2019',
-    deposition:'Gente o meu muito obrigada a vcs do CFC DE TAQUARI pelo carinho a seriedade com quem vcs lidam todos os dias. Sempre me sinti bem aí e sempre resolveram meus problemas quando precisava. Obrigada ao Felipe, Marquinhos e ao Maicon que acreditaram e me apoiavam sempre vcs vão ficar no meu coração. As meninas da recepção eu não sei o nome delas, mas são uma queridas. E a professora de aula teórica muito querida por todos e pura simpatia. Obrigada de coração agora e só cair a ficha que ainda não caiu quando me dou por conta dou risada de felicidade.'
-  },
+
 ]
 
 export const Depositions = forwardRef((props,ref:any) => {
@@ -72,9 +83,9 @@ export const Depositions = forwardRef((props,ref:any) => {
           <div className="lg:absolute left-0 lg:top-[-140px] mr-auto lg:ml-auto">
             <div ref={sliderRef} className="keen-slider">
               {depositionsItems.map((item, index) => (
-              <div key={index} className="keen-slider__slide rounded-lg bg-[#720285] text-white p-[20px]">
+              <div key={index} className="keen-slider__slide rounded-lg bg-[#720285] text-white p-[20px] h-max">
                 <Quotes size={50} weight="fill" />
-                <p className="font-medium text-sm">
+                <p className="font-medium max-w-[600px] text-sm">
                   {item.deposition}
                 </p>
                 <div className="flex gap-2 item-center mt-[21px]">
