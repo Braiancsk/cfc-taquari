@@ -28,6 +28,7 @@ export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = a
       courses:courses,
       posts:posts.slice(0,4)
     },
+    revalidate: 60, // In seconds
   }
 }
 

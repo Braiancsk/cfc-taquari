@@ -65,7 +65,7 @@ const Index = ({post,lastPosts}:any) => {
           </div>
 
           <aside className='w-full lg:max-w-[30%] lg:py-10 flex flex-col gap-3'>
-          <strong className='text-title text-sm block mb-5'>{lastPosts.lenght > 0 ? 'Últimas postagens' : 'Nenhuma outra postagem recente'}</strong>
+          <strong className='text-title text-sm block mb-5'>{lastPosts.length > 0 ? 'Últimas postagens' : 'Nenhuma outra postagem recente'}</strong>
           {lastPosts.map((post:any) => (
                 <AsidePost
                 key={post.uid}
@@ -111,11 +111,12 @@ export const getStaticProps: GetStaticProps = async ({params, previewData}) => {
     const post = await client.getByUID('posts', uid)
     const posts = await client.getAllByType('posts')
     const lastPosts = posts.filter(item => item.data.titulo !== post.data.titulo).slice(0,5)
-    console.log(post)
+    console.log(lastPosts)
     return {
         props: {
          post: post,
          lastPosts:lastPosts
-        }
+        },
+        revalidate: 60, // In seconds
     }
 }

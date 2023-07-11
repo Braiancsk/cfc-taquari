@@ -105,7 +105,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
                     </div>
                   </div>
                   <a
-                    href="https://www.facebook.com/"
+                    href="https://www.facebook.com/cfctaquari/"
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center justify-center rounded-lg bg-white w-[30px] h-[30px]"
@@ -113,7 +113,7 @@ export const Header = ({coursesActive,aboutActive,depositionsActive,contactActiv
                     <FacebookLogo size={24} />
                   </a>
                   <a
-                    href="https://www.instagram.com/"
+                    href="https://www.secure.instagram.com/cfctaquari/?hl=pt"
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center justify-center rounded-lg bg-white w-[30px] h-[30px]"
