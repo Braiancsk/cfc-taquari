@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = a
   return {
     props: {
       courses:courses,
-      posts:posts.slice(0,2)
+      posts:posts.slice(0,4)
     },
   }
 }

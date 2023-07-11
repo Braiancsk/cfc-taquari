@@ -64,7 +64,7 @@ const Index = ({post,lastPosts}:any) => {
             
           </div>
 
-          <aside className='w-full lg:max-w-[30%] lg:py-10'>
+          <aside className='w-full lg:max-w-[30%] lg:py-10 flex flex-col gap-3'>
           <strong className='text-title text-sm block mb-5'>{lastPosts.lenght > 0 ? 'Últimas postagens' : 'Nenhuma outra postagem recente'}</strong>
           {lastPosts.map((post:any) => (
                 <AsidePost
