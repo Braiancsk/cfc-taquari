@@ -26,9 +26,9 @@ export const getStaticProps: GetStaticProps<{ courses: CoursesDataTypes[] }> = a
   return {
     props: {
       courses:courses,
-      posts:posts.slice(0,4)
+      posts:posts.slice(0,4),
+      revalidate: 60, // In seconds
     },
-    revalidate: 60, // In seconds
   }
 }
 
