@@ -93,14 +93,21 @@ export default Index
 export const getStaticPaths: GetStaticPaths = async () => {
     // const client = createClient()
     // const posts = await client.getAllByType('posts')
-    // const params = posts.map((post) => post.uid)
+    // const slugs = posts.map((post) => {
+    //   return {
+    //     params:{
+    //       uid:post.uid
+    //     }
+    //   }
+    // })
    
     return {
         // Only `/posts/1` and `/posts/2` are generated at build time
-        paths: [],
+        paths:[],
         // Enable statically generating additional pages
         // For example: `/posts/3`
         fallback: 'blocking',
+        
       }
 }
 
@@ -115,8 +122,8 @@ export const getStaticProps: GetStaticProps = async ({params, previewData}) => {
     return {
         props: {
          post: post,
-         lastPosts:lastPosts
+         lastPosts:lastPosts,
+         revalidate: 60, // In seconds
         },
-        revalidate: 60, // In seconds
     }
 }
